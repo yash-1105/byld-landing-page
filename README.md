@@ -47,7 +47,7 @@ happen via the Extensions menu, especially with multiple Google accounts signed 
 4. In the `CONFIG` block at the top:
    - set **`SECRET`** to a long random string (keep a copy — same value goes into Vercel).
    - set **`SHEET_ID`** to your Sheet's ID (the long part of its URL between `/d/` and `/edit`).
-   - optionally set `LOGO_URL` to your live site's logo URL.
+   - (the email logo is embedded in the script, so nothing else to configure.)
 5. Click **Deploy → New deployment** → the **gear** ⚙️ → choose **Web app**. Set:
    - **Execute as:** Me (info@byldspace.com)
    - **Who has access:** Anyone
@@ -96,8 +96,8 @@ npx vercel dev      # runs the site AND /api on a local port, using .env.local
 ```
 
 ## Notes
-- The thank-you email (subject, HTML, text) lives in `apps-script/Code.gs`. The logo is referenced by
-  URL (`CONFIG.LOGO_URL`); set it to your deployed site so it renders in the email.
+- The thank-you email (subject, HTML, text) lives in `apps-script/Code.gs`. The logo is **embedded
+  inline** (base64, sent as a CID attachment), so it always renders without depending on a hosted URL.
 - A hidden honeypot field + a shared secret block basic bots/abuse.
 - Signups are written to the Sheet *before* the email is sent, so a mail hiccup never loses a lead.
 - To change the Apps Script later, edit the code then **Deploy → Manage deployments → Edit → New
