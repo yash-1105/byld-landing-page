@@ -5,20 +5,13 @@ import { prefersReducedMotion } from '../hooks/useInteractions'
 const mono = "'JetBrains Mono',monospace"
 const serif = "'Inter',system-ui,sans-serif"
 
-const VIDEO = '/assets/hero-villa-2.mp4'          // desktop: all-intra, scrubbed on scroll
-const MOBILE_VIDEO = '/assets/hero-villa-mobile.mp4' // mobile: lighter, autoplay-looped
+const VIDEO = '/assets/hero-villa-2.mp4'                  // desktop: landscape, all-intra
 const POSTER = '/assets/hero-villa-poster.jpg'
+const MOBILE_VIDEO = '/assets/hero-villa-mobile-v2.mp4'  // mobile: vertical 9:16, all-intra
+const MOBILE_POSTER = '/assets/hero-villa-mobile-poster.jpg'
 
 const clamp = (n: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, n))
-
-// scroll-scrubbing a <video> via currentTime is desktop-only — iOS/Android browsers
-// will not decode/seek without playback, so phones get an autoplay loop instead.
-type Mode = 'scrub' | 'loop' | 'static'
-const detectMode = (): Mode => {
-  if (prefersReducedMotion()) return 'static'
-  if (typeof window !== 'undefined' && window.matchMedia('(max-width: 820px)').matches) return 'loop'
-  return 'scrub'
-}
+const matchMobile = () => typeof window !== 'undefined' && window.matchMedia('(max-width: 820px)').matches
 
 const cover: React.CSSProperties = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }
 
@@ -26,19 +19,21 @@ export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [progress, setProgress] = useState(0)
-  const [mode, setMode] = useState<Mode>(detectMode)
+  const [reduce] = useState(prefersReducedMotion)
+  const [mobile, setMobile] = useState(matchMobile)
 
-  // keep mode in sync if the viewport crosses the mobile breakpoint
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 820px)')
-    const onChange = () => setMode(detectMode())
+    const onChange = () => setMobile(mq.matches)
     mq.addEventListener('change', onChange)
     return () => mq.removeEventListener('change', onChange)
   }, [])
 
-  // desktop: scrub the video's currentTime to scroll position while the hero is pinned
+  // Scrub the video's currentTime to scroll position while the hero is pinned.
+  // Mobile uses a vertical all-intra clip; it must be "primed" with a muted
+  // play->pause so iOS/Android will actually decode and paint seeked frames.
   useEffect(() => {
-    if (mode !== 'scrub') return
+    if (reduce) return
     const section = sectionRef.current
     const video = videoRef.current
     if (!section || !video) return
@@ -46,6 +41,15 @@ export default function Hero() {
     let duration = video.duration || 0
     const onMeta = () => { duration = video.duration || 0 }
     video.addEventListener('loadedmetadata', onMeta)
+
+    let cleanupPrime = () => {}
+    if (mobile) {
+      const prime = () => { video.muted = true; const p = video.play(); if (p) p.then(() => video.pause()).catch(() => {}) }
+      prime()
+      const onFirst = () => prime() // iOS sometimes only paints after a real gesture
+      window.addEventListener('touchstart', onFirst, { passive: true, once: true })
+      cleanupPrime = () => window.removeEventListener('touchstart', onFirst)
+    }
 
     let target = 0 // desired currentTime, lerped toward each frame for buttery scrubbing
     const compute = () => {
@@ -72,27 +76,18 @@ export default function Hero() {
     window.addEventListener('resize', onScroll)
     return () => {
       cancelAnimationFrame(raf)
+      cleanupPrime()
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
       video.removeEventListener('loadedmetadata', onMeta)
     }
-  }, [mode])
+  }, [reduce, mobile])
 
-  // mobile: force muted (React's muted attr is unreliable) and kick off autoplay
-  useEffect(() => {
-    if (mode !== 'loop') return
-    const v = videoRef.current
-    if (!v) return
-    v.muted = true
-    v.play().catch(() => {})
-  }, [mode])
-
-  // progress-driven overlay transitions (scrub mode only)
-  const scrub = mode === 'scrub'
-  const contentOpacity = scrub ? 1 - clamp((progress - 0.5) / 0.28, 0, 1) : 1
-  const contentShift = scrub ? -progress * 46 : 0
-  const paperFade = scrub ? clamp((progress - 0.76) / 0.24, 0, 1) : 0
-  const hintOpacity = scrub ? 1 - clamp(progress / 0.12, 0, 1) : 0
+  // progress-driven overlay transitions
+  const contentOpacity = reduce ? 1 : 1 - clamp((progress - 0.5) / 0.28, 0, 1)
+  const contentShift = reduce ? 0 : -progress * 46
+  const paperFade = reduce ? 0 : clamp((progress - 0.76) / 0.24, 0, 1)
+  const hintOpacity = reduce ? 0 : 1 - clamp(progress / 0.12, 0, 1)
 
   const copy = (
     <div style={{ maxWidth: 760 }}>
@@ -133,71 +128,63 @@ export default function Hero() {
     </div>
   )
 
-  // ── mobile (autoplay loop) / reduced-motion (static poster): a normal full-height hero ──
-  if (mode !== 'scrub') {
+  // ── reduced-motion: static poster, normal scroll ──
+  if (reduce) {
     return (
       <section id="top" style={{
         position: 'relative', minHeight: '100svh', background: '#14120E',
         display: 'flex', alignItems: 'center', overflow: 'hidden',
       }}>
-        {mode === 'loop' ? (
-          <video ref={videoRef} src={MOBILE_VIDEO} poster={POSTER} autoPlay loop muted playsInline preload="auto" style={cover} />
-        ) : (
-          <img src={POSTER} alt="" aria-hidden="true" style={cover} />
-        )}
-        <div aria-hidden="true" style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none',
-          background:
-            'linear-gradient(90deg, rgba(18,16,12,.80) 0%, rgba(18,16,12,.50) 45%, rgba(18,16,12,.28) 100%),' +
-            'linear-gradient(180deg, rgba(18,16,12,.40) 0%, rgba(18,16,12,.12) 40%, rgba(18,16,12,.55) 100%)',
-        }} />
-        <div style={{
-          position: 'relative', zIndex: 2, width: '100%', maxWidth: 1240, margin: '0 auto',
-          padding: 'clamp(96px,16vh,140px) clamp(22px,6vw,40px) clamp(64px,10vh,96px)',
-        }}>
+        <img src={mobile ? MOBILE_POSTER : POSTER} alt="" aria-hidden="true" style={cover} />
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'rgba(18,16,12,.5)', pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: 1240, margin: '0 auto', padding: 'clamp(96px,16vh,140px) clamp(22px,6vw,40px)' }}>
           {copy}
         </div>
       </section>
     )
   }
 
-  // ── desktop: pinned, scroll-scrubbed video ──
+  // ── pinned, scroll-scrubbed video (landscape on desktop, vertical 9:16 on mobile) ──
+  const src = mobile ? MOBILE_VIDEO : VIDEO
+  const poster = mobile ? MOBILE_POSTER : POSTER
+  const scrim = mobile
+    ? 'linear-gradient(180deg, rgba(18,16,12,.20) 0%, rgba(18,16,12,.30) 36%, rgba(18,16,12,.50) 68%, rgba(18,16,12,.74) 100%)'
+    : 'linear-gradient(90deg, rgba(18,16,12,.78) 0%, rgba(18,16,12,.46) 38%, rgba(18,16,12,.10) 66%, rgba(18,16,12,.30) 100%),' +
+      'linear-gradient(180deg, rgba(18,16,12,.34) 0%, rgba(18,16,12,0) 28%, rgba(18,16,12,0) 64%, rgba(18,16,12,.40) 100%)'
+
   return (
     <section id="top" ref={sectionRef} style={{ position: 'relative', height: '320vh', background: '#14120E' }}>
       <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
         <video
-          ref={videoRef} src={VIDEO} poster={POSTER}
+          key={src} ref={videoRef} src={src} poster={poster}
           muted playsInline preload="auto"
           style={cover}
         />
 
-        {/* warm legibility scrim */}
-        <div aria-hidden="true" style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none',
-          background:
-            'linear-gradient(90deg, rgba(18,16,12,.78) 0%, rgba(18,16,12,.46) 38%, rgba(18,16,12,.10) 66%, rgba(18,16,12,.30) 100%),' +
-            'linear-gradient(180deg, rgba(18,16,12,.34) 0%, rgba(18,16,12,0) 28%, rgba(18,16,12,0) 64%, rgba(18,16,12,.40) 100%)',
-        }} />
+        {/* legibility scrim */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: scrim }} />
 
         {/* copy */}
         <div style={{
-          position: 'relative', zIndex: 2, width: '100%', maxWidth: 1240,
-          margin: '0 auto', padding: 'clamp(72px,9vw,120px) 40px',
+          position: 'relative', zIndex: 2, width: '100%', maxWidth: 1240, margin: '0 auto',
+          padding: mobile ? 'clamp(72px,9vw,120px) clamp(22px,6vw,34px)' : 'clamp(72px,9vw,120px) 40px',
           opacity: contentOpacity, transform: `translateY(${contentShift}px)`,
           transition: 'opacity .25s linear', willChange: 'opacity, transform',
         }}>
           {copy}
         </div>
 
-        {/* scroll hint */}
-        <div aria-hidden="true" style={{
-          position: 'absolute', bottom: 30, left: '50%', transform: 'translateX(-50%)',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 9,
-          opacity: hintOpacity, transition: 'opacity .25s linear', pointerEvents: 'none', zIndex: 2,
-        }}>
-          <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: '.22em', textTransform: 'uppercase', color: 'rgba(246,244,239,.6)' }}>Scroll</span>
-          <span style={{ width: 1, height: 34, background: 'linear-gradient(rgba(246,244,239,.6), rgba(246,244,239,0))' }} />
-        </div>
+        {/* scroll hint (desktop only — would collide with centered copy on tall phones) */}
+        {!mobile && (
+          <div aria-hidden="true" style={{
+            position: 'absolute', bottom: 30, left: '50%', transform: 'translateX(-50%)',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 9,
+            opacity: hintOpacity, transition: 'opacity .25s linear', pointerEvents: 'none', zIndex: 2,
+          }}>
+            <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: '.22em', textTransform: 'uppercase', color: 'rgba(246,244,239,.6)' }}>Scroll</span>
+            <span style={{ width: 1, height: 34, background: 'linear-gradient(rgba(246,244,239,.6), rgba(246,244,239,0))' }} />
+          </div>
+        )}
 
         {/* fade to paper as the pin releases, easing into the light sections below */}
         <div aria-hidden="true" style={{
