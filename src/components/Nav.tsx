@@ -9,9 +9,6 @@ export default function Nav() {
   useEffect(() => {
     const clamp = (n: number) => Math.max(0, Math.min(1, n))
     const onScroll = () => {
-      // mobile hero is a bright vertical sky shot — keep the bar solid so the
-      // dark logo stays legible (a transparent white logo would vanish on it)
-      if (window.matchMedia('(max-width: 820px)').matches) { setT(1); return }
       const hero = document.getElementById('top')
       if (!hero) { setT(1); return }
       const rect = hero.getBoundingClientRect()

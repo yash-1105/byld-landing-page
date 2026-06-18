@@ -148,7 +148,7 @@ export default function Hero() {
   const src = mobile ? MOBILE_VIDEO : VIDEO
   const poster = mobile ? MOBILE_POSTER : POSTER
   const scrim = mobile
-    ? 'linear-gradient(180deg, rgba(18,16,12,.20) 0%, rgba(18,16,12,.30) 36%, rgba(18,16,12,.50) 68%, rgba(18,16,12,.74) 100%)'
+    ? 'linear-gradient(180deg, rgba(18,16,12,.64) 0%, rgba(18,16,12,.30) 15%, rgba(18,16,12,.30) 40%, rgba(18,16,12,.44) 66%, rgba(18,16,12,.74) 100%)'
     : 'linear-gradient(90deg, rgba(18,16,12,.78) 0%, rgba(18,16,12,.46) 38%, rgba(18,16,12,.10) 66%, rgba(18,16,12,.30) 100%),' +
       'linear-gradient(180deg, rgba(18,16,12,.34) 0%, rgba(18,16,12,0) 28%, rgba(18,16,12,0) 64%, rgba(18,16,12,.40) 100%)'
 
