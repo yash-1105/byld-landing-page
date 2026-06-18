@@ -137,7 +137,7 @@ export default function FeatureModal({ index, onClose }: { index: number | null;
             <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', color: ACCENT }}>{f.tag}</span>
             <button className="modal-close" aria-label="Close" onClick={onClose} style={{ width: 34, height: 34, borderRadius: '50%', border: '1px solid #E0D7C7', background: '#FCFAF6', cursor: 'pointer', color: '#8B8275', fontSize: 16, lineHeight: 1 }}>×</button>
           </div>
-          <h3 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(28px,3.6vw,42px)', lineHeight: 1.05, letterSpacing: '-0.02em', color: '#29261F' }}>{f.title}</h3>
+          <h3 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(28px,3.6vw,42px)', lineHeight: 1.05, letterSpacing: '-0.025em', color: '#8B8275' }}>{f.title}</h3>
           <p style={{ margin: '22px 0 0', fontSize: 16.5, lineHeight: 1.62, color: '#5C564B' }}>{f.body}</p>
           <div style={{ marginTop: 'auto', paddingTop: 30, display: 'flex', alignItems: 'center', gap: 8, fontFamily: mono, fontSize: 11, letterSpacing: '.06em', color: '#A79E90' }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: ACCENT }} />LIVE PREVIEW · BYLD SPACE</div>
         </div>

@@ -116,7 +116,7 @@ export default function Hero() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(44px,6.4vw,86px)', lineHeight: 1.02, letterSpacing: '-0.025em', color: '#F6F4EF', overflowWrap: 'break-word' }}>
+            <h1 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(44px,6.4vw,86px)', lineHeight: 1.02, letterSpacing: '-0.03em', color: '#F6F4EF', overflowWrap: 'break-word' }}>
               The workspace built for <span style={{ color: '#E4B488' }}>modern architecture</span> and interior firms.
             </h1>
 
@@ -131,7 +131,7 @@ export default function Hero() {
               <a href="#access" data-mag="0.45" className="hero-cta" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 10, textDecoration: 'none', background: '#F6F4EF',
                 color: '#29261F', fontSize: 15.5, fontWeight: 600, letterSpacing: '-0.01em', padding: '16px 28px',
-                borderRadius: 999, boxShadow: '0 18px 40px -16px rgba(0,0,0,.6)',
+                borderRadius: 999, boxShadow: '0 18px 40px -16px rgba(20,15,9,.5)',
                 transition: 'transform .4s cubic-bezier(.2,.7,.3,1), box-shadow .4s, background .4s',
               }}>
                 Join Early Access

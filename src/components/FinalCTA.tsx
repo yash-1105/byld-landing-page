@@ -44,7 +44,7 @@ export default function FinalCTA() {
         <div style={{ position: 'absolute', top: 0, left: 0, width: '40%', height: '100%', background: 'linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.45) 50%, rgba(255,255,255,0) 100%)', animation: 'sheenSlide 7s ease-in-out infinite', pointerEvents: 'none' }} />
         <div style={{ position: 'relative' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, border: '1px solid #D2C7B4', borderRadius: 999, padding: '6px 13px', fontFamily: mono, fontSize: 11, letterSpacing: '.16em', textTransform: 'uppercase', color: '#8B8275', marginBottom: 30 }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: ACCENT, animation: 'pulse 2.6s ease-in-out infinite' }} />Coming Soon</span>
-          <h2 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(40px,6vw,80px)', lineHeight: 1.0, letterSpacing: '-0.025em', color: '#29261F' }}>Less chaos. <span style={{ color: '#B17A57' }}>More building.</span></h2>
+          <h2 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(40px,6vw,80px)', lineHeight: 1.0, letterSpacing: '-0.03em', color: '#8B8275' }}>Less chaos. <span style={{ color: '#B17A57' }}>More building.</span></h2>
           <p style={{ margin: '30px auto 0', maxWidth: 520, fontSize: 18, lineHeight: 1.6, color: '#5C564B' }}>Projects, collaboration, and flexible talent, all in one ecosystem.</p>
           <p style={{ margin: '14px auto 0', maxWidth: 520, fontSize: 18, lineHeight: 1.6, color: '#5C564B' }}>BYLD Space is reimagining how design and construction teams work together.</p>
           <form onSubmit={submit} style={{ margin: '40px auto 0', maxWidth: 440, display: 'flex', gap: 10, flexWrap: 'wrap' }}>

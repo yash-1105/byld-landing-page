@@ -25,7 +25,7 @@ export default function Problem() {
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px,9vw,128px) 40px', display: 'flex', flexWrap: 'wrap', gap: 'clamp(40px,6vw,88px)' }}>
         <div data-reveal="1" style={{ flex: '1 1 420px', minWidth: 300 }}>
           <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>02, The Problem</div>
-          <h2 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(32px,4.4vw,58px)', lineHeight: 1.06, letterSpacing: '-0.02em', color: '#29261F' }}>
+          <h2 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(32px,4.4vw,58px)', lineHeight: 1.06, letterSpacing: '-0.025em', color: '#8B8275' }}>
             Stop managing projects across <span style={{ color: '#B17A57' }}>five different tools.</span>
           </h2>
           <p style={{ margin: '32px 0 0', maxWidth: 430, fontSize: 18, lineHeight: 1.65, color: '#5C564B' }}>

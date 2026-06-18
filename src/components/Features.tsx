@@ -108,7 +108,7 @@ export default function Features({ onOpen }: { onOpen: (i: number) => void }) {
     <section id="features" style={{ scrollMarginTop: 90, maxWidth: 1240, margin: '0 auto', padding: 'clamp(80px,10vw,140px) 40px' }}>
       <div data-reveal="1" style={{ maxWidth: 720, marginBottom: 'clamp(40px,5vw,64px)' }}>
         <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>03, Features</div>
-        <h2 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.02em', color: '#29261F' }}>Everything your team needs to <span style={{ color: '#B17A57' }}>stay on track</span></h2>
+        <h2 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.025em', color: '#8B8275' }}>Everything your team needs to <span style={{ color: '#B17A57' }}>stay on track</span></h2>
       </div>
       <div data-reveal="1" data-reveal-delay="0.06" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: 18 }}>
         {visuals.map((v, i) => <Card key={i} index={i} visual={v} onOpen={onOpen} />)}

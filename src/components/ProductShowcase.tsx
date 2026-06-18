@@ -51,7 +51,7 @@ export default function ProductShowcase() {
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(80px,10vw,140px) 40px' }}>
         <div data-reveal="1" style={{ maxWidth: 720, marginBottom: 'clamp(40px,5vw,64px)' }}>
           <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>04, The Product</div>
-          <h2 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.02em', color: '#29261F' }}>One workspace, <span style={{ color: '#B17A57' }}>every angle</span> of the project.</h2>
+          <h2 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.025em', color: '#8B8275' }}>One workspace, <span style={{ color: '#B17A57' }}>every angle</span> of the project.</h2>
           <p style={{ margin: '22px 0 0', fontSize: 16, color: '#8B8275' }}>Switch modules in the sidebar, every workflow is live and interactive.</p>
         </div>
 
@@ -115,14 +115,14 @@ const panelIn: React.CSSProperties = { animation: 'panelIn .45s cubic-bezier(.2,
 // approval thumbnails by id: Facade, Lighting, Material schedule, Kitchen
 const APPROVAL_SCENES: Record<number, SceneKind> = { 1: 'facade', 2: 'lighting', 3: 'schedule', 4: 'kitchen' }
 const headTag = (s: string) => <div style={{ fontFamily: mono, fontSize: 10, letterSpacing: '.14em', color: '#A79E90', marginBottom: 6 }}>{s}</div>
-const h3 = (s: string) => <h3 style={{ fontFamily: serif, fontWeight: 800, fontSize: 30, letterSpacing: '-0.02em', color: '#29261F' }}>{s}</h3>
+const h3 = (s: string) => <h3 style={{ fontFamily: serif, fontWeight: 600, fontSize: 30, letterSpacing: '-0.025em', color: '#8B8275' }}>{s}</h3>
 
 /* ── Module 1: Project Management ── */
 function PMPanel() {
   const stat = (label: string, value: string, color: string) => (
     <div className="stat-card" style={{ background: '#F1ECE2', border: '1px solid #EAE3D5', borderRadius: 13, padding: 15, cursor: 'default' }}>
       <div style={{ fontFamily: mono, fontSize: 9.5, letterSpacing: '.1em', color: '#8B8275' }}>{label}</div>
-      <div style={{ fontFamily: serif, fontWeight: 800, fontSize: 38, color, marginTop: 4 }}>{value}</div>
+      <div style={{ fontFamily: serif, fontWeight: 600, fontSize: 38, color, marginTop: 4 }}>{value}</div>
     </div>
   )
   const proj = (scene: SceneKind, name: string, w: string, color: string, pct: string) => (
@@ -174,7 +174,7 @@ function ProcPanel({ vendors, displayBudget, setVendor }: { vendors: VendorSel; 
         <div>{headTag('SELECT VENDORS · LIVE BUDGET')}{h3('Procurement')}</div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontFamily: mono, fontSize: 9.5, letterSpacing: '.1em', color: '#8B8275' }}>ESTIMATED BUDGET</div>
-          <div style={{ fontFamily: serif, fontWeight: 800, fontSize: 34, color: '#29261F', lineHeight: 1 }}>{fmtL(displayBudget)}</div>
+          <div style={{ fontFamily: serif, fontWeight: 600, fontSize: 34, color: '#29261F', lineHeight: 1 }}>{fmtL(displayBudget)}</div>
         </div>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(252px,1fr))', gap: 12 }}>
