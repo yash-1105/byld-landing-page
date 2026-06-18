@@ -13,8 +13,14 @@ export default function Nav() {
       if (!hero) { setT(1); return }
       const rect = hero.getBoundingClientRect()
       const span = rect.height - window.innerHeight
-      const progress = span > 0 ? clamp(-rect.top / span) : 1
-      setT(clamp((progress - 0.76) / 0.24))
+      if (span > window.innerHeight * 0.5) {
+        // desktop: tall pinned hero — fade in sync with the video-to-paper transition
+        const progress = clamp(-rect.top / span)
+        setT(clamp((progress - 0.76) / 0.24))
+      } else {
+        // mobile / reduced-motion: short hero — clear at top, opaque by ~60% down it
+        setT(clamp(-rect.top / (rect.height * 0.6)))
+      }
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
