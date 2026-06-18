@@ -4,7 +4,7 @@ import { Scene, type SceneKind } from './Imagery'
 import { RoleIcon, roleKeyFor } from './RoleIcons'
 
 const mono = "'JetBrains Mono',monospace"
-const serif = "'Newsreader',serif"
+const serif = "'Inter',system-ui,sans-serif"
 
 function Preview({ k }: { k: FeatureKey }) {
   const panelIn = { animation: 'panelIn .5s cubic-bezier(.2,.7,.3,1) both' as const }
@@ -39,7 +39,7 @@ function Preview({ k }: { k: FeatureKey }) {
     return (
       <div style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', gap: 12, ...panelIn }}>
         <div style={{ background: '#FCFAF6', border: '1px solid #EDE7DB', borderRadius: 13, padding: '13px 15px', alignSelf: 'flex-start', maxWidth: '78%', boxShadow: '0 16px 34px -22px rgba(41,38,31,.3)' }}><div style={{ fontSize: 13, color: '#5C564B' }}>Sharing the latest renders for your review.</div></div>
-        <div style={{ background: '#29261F', borderRadius: 13, padding: '13px 15px', alignSelf: 'flex-end', maxWidth: '78%' }}><div style={{ fontSize: 13, color: '#F6F4EF' }}>Love the living room — approved.</div></div>
+        <div style={{ background: '#29261F', borderRadius: 13, padding: '13px 15px', alignSelf: 'flex-end', maxWidth: '78%' }}><div style={{ fontSize: 13, color: '#F6F4EF' }}>Love the living room, approved.</div></div>
         <div style={{ background: '#FCFAF6', border: '1px solid #EDE7DB', borderRadius: 13, padding: '11px 14px', alignSelf: 'flex-start', display: 'flex', alignItems: 'center', gap: 10 }}><div style={{ position: 'relative', width: 30, height: 38, borderRadius: 4, overflow: 'hidden', flex: 'none' }}><Scene kind="interior" /></div><span style={{ fontSize: 12, color: '#5C564B' }}>Render_LivingRoom_v3.jpg</span></div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, alignSelf: 'flex-end' }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: '#7E866A' }} /><span style={{ fontFamily: mono, fontSize: 9.5, color: '#A79E90' }}>CLIENT · ONLINE</span></div>
       </div>
@@ -56,7 +56,7 @@ function Preview({ k }: { k: FeatureKey }) {
     )
     return (
       <div style={{ ...card, display: 'flex', flexDirection: 'column', gap: 9 }}>
-        {r('#E0D7C7', 'Floor Plans — Rev C.pdf', 'UPDATED 2H AGO', true)}
+        {r('#E0D7C7', 'Floor Plans, Rev C.pdf', 'UPDATED 2H AGO', true)}
         {r('#D6C9B2', 'Quotation_Marble.xlsx', '3 VERSIONS')}
         {r('#C9BFAE', 'Contract_Signed.pdf', 'LOCKED')}
       </div>
@@ -137,7 +137,7 @@ export default function FeatureModal({ index, onClose }: { index: number | null;
             <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', color: ACCENT }}>{f.tag}</span>
             <button className="modal-close" aria-label="Close" onClick={onClose} style={{ width: 34, height: 34, borderRadius: '50%', border: '1px solid #E0D7C7', background: '#FCFAF6', cursor: 'pointer', color: '#8B8275', fontSize: 16, lineHeight: 1 }}>×</button>
           </div>
-          <h3 style={{ fontFamily: serif, fontWeight: 300, fontSize: 'clamp(28px,3.6vw,42px)', lineHeight: 1.05, letterSpacing: '-0.02em', color: '#29261F' }}>{f.title}</h3>
+          <h3 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(28px,3.6vw,42px)', lineHeight: 1.05, letterSpacing: '-0.02em', color: '#29261F' }}>{f.title}</h3>
           <p style={{ margin: '22px 0 0', fontSize: 16.5, lineHeight: 1.62, color: '#5C564B' }}>{f.body}</p>
           <div style={{ marginTop: 'auto', paddingTop: 30, display: 'flex', alignItems: 'center', gap: 8, fontFamily: mono, fontSize: 11, letterSpacing: '.06em', color: '#A79E90' }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: ACCENT }} />LIVE PREVIEW · BYLD SPACE</div>
         </div>

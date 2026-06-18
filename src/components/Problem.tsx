@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { WhatsAppLogo, ExcelLogo, DriveLogo, GmailLogo } from './BrandLogos'
 
 const mono = "'JetBrains Mono',monospace"
-const serif = "'Newsreader',serif"
+const serif = "'Inter',system-ui,sans-serif"
 
 const tileBase = (rot: number): React.CSSProperties => ({
   aspectRatio: '1', borderRadius: 14, background: '#FCFAF6', border: '1px dashed #D8CDBA',
@@ -24,9 +24,9 @@ export default function Problem() {
     <section style={{ background: '#F1ECE2', borderTop: '1px solid #E8E2D6', borderBottom: '1px solid #E8E2D6' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px,9vw,128px) 40px', display: 'flex', flexWrap: 'wrap', gap: 'clamp(40px,6vw,88px)' }}>
         <div data-reveal="1" style={{ flex: '1 1 420px', minWidth: 300 }}>
-          <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>02 — The Problem</div>
-          <h2 style={{ fontFamily: serif, fontWeight: 300, fontSize: 'clamp(32px,4.4vw,58px)', lineHeight: 1.06, letterSpacing: '-0.02em', color: '#29261F' }}>
-            Stop managing projects across <span style={{ fontStyle: 'italic' }}>five different tools.</span>
+          <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>02, The Problem</div>
+          <h2 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(32px,4.4vw,58px)', lineHeight: 1.06, letterSpacing: '-0.02em', color: '#29261F' }}>
+            Stop managing projects across <span style={{ color: '#B17A57' }}>five different tools.</span>
           </h2>
           <p style={{ margin: '32px 0 0', maxWidth: 430, fontSize: 18, lineHeight: 1.65, color: '#5C564B' }}>
             Projects shouldn't live across WhatsApp, Excel, Google Drive, emails, and endless follow-ups.

@@ -73,10 +73,10 @@ export type ApprovalStatus = 'pending' | 'approved' | 'rejected'
 export type Approval = { id: number; title: string; meta: string; status: ApprovalStatus; tone: string; history: string[] }
 
 export const INITIAL_APPROVALS: Approval[] = [
-  { id: 1, title: 'Facade Design — v3', meta: 'Shared with client · 2 revisions', status: 'approved', tone: '#D9C6A6,#C0A06E', history: ['v1 submitted to client', 'v2 — window proportions revised', 'v3 — approved by client'] },
-  { id: 2, title: 'Lighting Plan — v2', meta: 'Awaiting client feedback', status: 'pending', tone: '#C9BFAE,#A89C86', history: ['v1 submitted', 'v2 — added cove lighting'] },
-  { id: 3, title: 'Material Schedule — v1', meta: 'Pending internal review', status: 'pending', tone: '#B79766,#8E7044', history: ['v1 submitted for internal review'] },
-  { id: 4, title: 'Kitchen Layout — v4', meta: '3 revisions logged', status: 'pending', tone: '#9CA382,#76805F', history: ['v1 concept', 'v2 — island added', 'v3 — plumbing moved', 'v4 — final layout'] },
+  { id: 1, title: 'Facade Design, v3', meta: 'Shared with client · 2 revisions', status: 'approved', tone: '#D9C6A6,#C0A06E', history: ['v1 submitted to client', 'v2, window proportions revised', 'v3, approved by client'] },
+  { id: 2, title: 'Lighting Plan, v2', meta: 'Awaiting client feedback', status: 'pending', tone: '#C9BFAE,#A89C86', history: ['v1 submitted', 'v2, added cove lighting'] },
+  { id: 3, title: 'Material Schedule, v1', meta: 'Pending internal review', status: 'pending', tone: '#B79766,#8E7044', history: ['v1 submitted for internal review'] },
+  { id: 4, title: 'Kitchen Layout, v4', meta: '3 revisions logged', status: 'pending', tone: '#9CA382,#76805F', history: ['v1 concept', 'v2, island added', 'v3, plumbing moved', 'v4, final layout'] },
 ]
 
 export const MODULE_LABELS = ['Project Management', 'Procurement', 'Documents', 'Approvals', 'Site Coordination']

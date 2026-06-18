@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { ACCENT, ECO } from '../data'
 
 const mono = "'JetBrains Mono',monospace"
-const serif = "'Newsreader',serif"
+const serif = "'Inter',system-ui,sans-serif"
 
 export default function Ecosystem() {
   const [activeNode, setActiveNode] = useState<number | null>(null)
@@ -12,8 +12,8 @@ export default function Ecosystem() {
   return (
     <section id="ecosystem" style={{ scrollMarginTop: 90, maxWidth: 1240, margin: '0 auto', padding: 'clamp(80px,10vw,140px) 40px', textAlign: 'center' }}>
       <div data-reveal="1" style={{ maxWidth: 680, margin: '0 auto clamp(30px,4vw,48px)' }}>
-        <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>07 — The Ecosystem</div>
-        <h2 style={{ fontFamily: serif, fontWeight: 300, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.08, letterSpacing: '-0.02em', color: '#29261F' }}>Everything connected, <span style={{ fontStyle: 'italic' }}>end to end</span></h2>
+        <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>07, The Ecosystem</div>
+        <h2 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.08, letterSpacing: '-0.02em', color: '#29261F' }}>Everything connected, <span style={{ color: '#B17A57' }}>end to end</span></h2>
       </div>
 
       <div data-reveal="1" data-reveal-delay="0.1" style={{ position: 'relative', width: '100%', maxWidth: 680, height: 580, margin: '0 auto' }}>

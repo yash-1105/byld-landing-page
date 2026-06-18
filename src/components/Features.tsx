@@ -4,7 +4,7 @@ import { Scene, type SceneKind } from './Imagery'
 import { RoleIcon, roleKeyFor } from './RoleIcons'
 
 const mono = "'JetBrains Mono',monospace"
-const serif = "'Newsreader',serif"
+const serif = "'Inter',system-ui,sans-serif"
 
 function Card({ index, visual, onOpen }: { index: number; visual: ReactNode; onOpen: (i: number) => void }) {
   const f = FEATURES[index]
@@ -63,7 +63,7 @@ const member = (color: string, role: string, tag: string) => (
 
 export default function Features({ onOpen }: { onOpen: (i: number) => void }) {
   const visuals: ReactNode[] = [
-    // PM — timeline
+    // PM, timeline
     <div style={pad()}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}><span style={{ fontFamily: mono, fontSize: 9, letterSpacing: '.1em', color: '#A79E90' }}>TIMELINE</span><span style={{ fontFamily: mono, fontSize: 9, color: '#A79E90' }}>Q3</span></div>
       {bar('Concept', '100%', '#29261F')}
@@ -71,31 +71,31 @@ export default function Features({ onOpen }: { onOpen: (i: number) => void }) {
       {bar('Build', '24%', '#C9BFAE')}
       {bar('Handover', '0%', '#C9BFAE')}
     </div>,
-    // CC — chat
+    // CC, chat
     <div style={pad({ gap: 10 })}>
       <div style={{ background: '#FCFAF6', borderRadius: 10, padding: '10px 12px', alignSelf: 'flex-start', maxWidth: '80%', boxShadow: '0 2px 8px -4px rgba(41,38,31,.15)' }}><div style={{ fontSize: 11, color: '#5C564B' }}>Sharing the latest renders for review.</div></div>
-      <div style={{ background: '#29261F', borderRadius: 10, padding: '10px 12px', alignSelf: 'flex-end', maxWidth: '78%' }}><div style={{ fontSize: 11, color: '#F6F4EF' }}>Love the living room — approved.</div></div>
+      <div style={{ background: '#29261F', borderRadius: 10, padding: '10px 12px', alignSelf: 'flex-end', maxWidth: '78%' }}><div style={{ fontSize: 11, color: '#F6F4EF' }}>Love the living room, approved.</div></div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, alignSelf: 'flex-end' }}><span style={{ width: 5, height: 5, borderRadius: '50%', background: '#7E866A' }} /><span style={{ fontFamily: mono, fontSize: 9, color: '#A79E90' }}>CLIENT · NOW</span></div>
     </div>,
-    // CD — files
+    // CD, files
     <div style={pad({ gap: 8 })}>
-      {fileRow('#E0D7C7', 'Floor Plans — Rev C.pdf', 'UPDATED 2H AGO')}
+      {fileRow('#E0D7C7', 'Floor Plans, Rev C.pdf', 'UPDATED 2H AGO')}
       {fileRow('#D6C9B2', 'Quotation_Marble.xlsx', 'LATEST VERSION')}
       {fileRow('#C9BFAE', 'Contract_Signed.pdf', 'LOCKED')}
     </div>,
-    // AR — approvals
+    // AR, approvals
     <div style={pad({ justifyContent: 'center', gap: 11 })}>
       {approvalRow('kitchen', 'Kitchen Layout v4', '2 REVISIONS', { t: 'Approved', bg: '#EBF0E2', c: '#5E6A4D' })}
       {approvalRow('lighting', 'Lighting Plan v2', 'AWAITING CLIENT', { t: 'Pending', bg: '#F3EAD9', c: '#A77B3F' })}
     </div>,
-    // SC — site map
+    // SC, site map
     <div style={{ height: '100%', padding: 0, position: 'relative' }}>
       <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(135deg,#EAE3D5 0 11px,#E4DCCB 11px 22px)' }} />
       <div style={{ position: 'absolute', left: 14, top: 14, fontFamily: mono, fontSize: 9, letterSpacing: '.1em', color: '#8B8275' }}>SITE / PHASE 02</div>
       <div style={{ position: 'absolute', left: 24, top: 62, display: 'flex', alignItems: 'center', gap: 8, background: '#FCFAF6', padding: '7px 11px', borderRadius: 999, boxShadow: '0 6px 16px -8px rgba(41,38,31,.3)' }}><span style={{ width: 7, height: 7, borderRadius: '50%', background: '#B17A57' }} /><span style={{ fontSize: 10.5, color: '#29261F', fontWeight: 500 }}>Foundation poured</span></div>
       <div style={{ position: 'absolute', right: 18, bottom: 18, display: 'flex', alignItems: 'center', gap: 8, background: '#29261F', padding: '7px 11px', borderRadius: 999 }}><span style={{ width: 7, height: 7, borderRadius: '50%', background: '#7E866A' }} /><span style={{ fontSize: 10.5, color: '#F6F4EF', fontWeight: 500 }}>3 issues resolved</span></div>
     </div>,
-    // TC — roster
+    // TC, roster
     <div style={pad({ justifyContent: 'center', gap: 10 })}>
       {member('#C7A574', 'Architect', 'LEAD')}
       {member('#9CA382', 'Interior Designer', 'DESIGN')}
@@ -107,8 +107,8 @@ export default function Features({ onOpen }: { onOpen: (i: number) => void }) {
   return (
     <section id="features" style={{ scrollMarginTop: 90, maxWidth: 1240, margin: '0 auto', padding: 'clamp(80px,10vw,140px) 40px' }}>
       <div data-reveal="1" style={{ maxWidth: 720, marginBottom: 'clamp(40px,5vw,64px)' }}>
-        <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>03 — Features</div>
-        <h2 style={{ fontFamily: serif, fontWeight: 300, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.02em', color: '#29261F' }}>Everything your team needs to <span style={{ fontStyle: 'italic' }}>stay on track</span></h2>
+        <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>03, Features</div>
+        <h2 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.02em', color: '#29261F' }}>Everything your team needs to <span style={{ color: '#B17A57' }}>stay on track</span></h2>
       </div>
       <div data-reveal="1" data-reveal-delay="0.06" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: 18 }}>
         {visuals.map((v, i) => <Card key={i} index={i} visual={v} onOpen={onOpen} />)}

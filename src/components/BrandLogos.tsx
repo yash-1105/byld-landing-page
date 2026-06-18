@@ -1,4 +1,4 @@
-/** Recognizable brand marks rebuilt as inline SVG — self-contained, crisp at any size. */
+/** Recognizable brand marks rebuilt as inline SVG, self-contained, crisp at any size. */
 
 type P = { size?: number }
 

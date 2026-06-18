@@ -4,7 +4,7 @@ body{
   margin:0;
   background:#F6F4EF;
   color:#5C564B;
-  font-family:'Hanken Grotesk',system-ui,sans-serif;
+  font-family:'Inter',system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
   overflow-x:hidden;

@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
 
 /**
- * Self-contained SVG imagery — material textures + architectural scenes.
+ * Self-contained SVG imagery, material textures + architectural scenes.
  * Each fills its parent (which must be position:relative; overflow:hidden).
  * Tasteful, on-brand tonal illustrations rather than stock photos, so they
  * always load and match the warm editorial palette.

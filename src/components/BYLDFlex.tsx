@@ -3,7 +3,7 @@ import { Scene, type SceneKind } from './Imagery'
 import { RoleIcon, roleKeyFor } from './RoleIcons'
 
 const mono = "'JetBrains Mono',monospace"
-const serif = "'Newsreader',serif"
+const serif = "'Inter',system-ui,sans-serif"
 
 // portfolio-preview thumbnails per talent role (Architect, Interior Designer, Draftsman, BIM, PM)
 const WORK_SCENES: SceneKind[][] = [
@@ -18,8 +18,8 @@ export default function BYLDFlex() {
   return (
     <section id="flex" style={{ scrollMarginTop: 90, position: 'relative', maxWidth: 1240, margin: '0 auto', padding: 'clamp(80px,10vw,140px) 40px', display: 'flex', flexWrap: 'wrap', gap: 'clamp(40px,6vw,72px)' }}>
       <div data-reveal="1" style={{ flex: '1 1 340px', minWidth: 300 }}>
-        <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>05 — BYLD Flex</div>
-        <h2 style={{ fontFamily: serif, fontWeight: 300, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.02em', color: '#29261F' }}>Flexible talent, <span style={{ fontStyle: 'italic' }}>when you need it</span></h2>
+        <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>05, BYLD Flex</div>
+        <h2 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.02em', color: '#29261F' }}>Flexible talent, <span style={{ color: '#B17A57' }}>when you need it</span></h2>
         <p style={{ margin: '30px 0 0', maxWidth: 420, fontSize: 18, lineHeight: 1.65, color: '#5C564B' }}>Scale your team without the overhead of permanent hiring.</p>
         <p style={{ margin: '20px 0 0', maxWidth: 420, fontSize: 18, lineHeight: 1.65, color: '#5C564B' }}>Through BYLD Flex, firms can access trusted architecture and design talent for short-term support, specialized tasks, and project-based requirements.</p>
         <div style={{ marginTop: 30, display: 'flex', alignItems: 'center', gap: 10, fontFamily: mono, fontSize: 11, letterSpacing: '.1em', color: '#A79E90' }}><span style={{ width: 6, height: 6, borderRadius: '50%', background: '#7E866A', animation: 'pulse 2.6s ease-in-out infinite' }} />HOVER A CARD TO PREVIEW</div>
@@ -46,7 +46,7 @@ export default function BYLDFlex() {
           </div>
         ))}
         <div style={{ background: '#F1ECE2', border: '1px dashed #D8CDBA', borderRadius: 16, padding: 15, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 6 }}>
-          <div style={{ fontFamily: serif, fontWeight: 300, fontSize: 30, color: '#29261F', lineHeight: 1 }}>+40</div>
+          <div style={{ fontFamily: serif, fontWeight: 800, fontSize: 30, color: '#29261F', lineHeight: 1 }}>+40</div>
           <div style={{ fontSize: 12, color: '#8B8275' }}>specialists across disciplines, ready to plug into your projects.</div>
         </div>
       </div>

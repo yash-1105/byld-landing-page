@@ -84,7 +84,7 @@ export function useGlobalInteractions() {
  * reduced motion so content is never stuck hidden.
  */
 // module-scoped so the observer survives StrictMode's dev mount/unmount/remount
-// cycle — otherwise below-the-fold sections can be stranded hidden.
+// cycle, otherwise below-the-fold sections can be stranded hidden.
 let sharedIO: IntersectionObserver | undefined
 
 export function useScrollReveal() {

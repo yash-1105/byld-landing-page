@@ -83,7 +83,7 @@ export function RoleIcon({ role, size = 20, color = '#FBF8F2' }: { role: RoleKey
       )
       break
     }
-    default: // contractor — hard hat
+    default: // contractor, hard hat
       body = (
         <g {...c}>
           <path d="M5 15 a7 7 0 0 1 14 0" />

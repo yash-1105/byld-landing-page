@@ -6,7 +6,7 @@ import {
 import { Scene, type SceneKind } from './Imagery'
 
 const mono = "'JetBrains Mono',monospace"
-const serif = "'Newsreader',serif"
+const serif = "'Inter',system-ui,sans-serif"
 
 type VendorSel = Record<ProcId, number>
 
@@ -50,9 +50,9 @@ export default function ProductShowcase() {
     <section id="product" style={{ scrollMarginTop: 90, background: '#F1ECE2', borderTop: '1px solid #E8E2D6', borderBottom: '1px solid #E8E2D6' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(80px,10vw,140px) 40px' }}>
         <div data-reveal="1" style={{ maxWidth: 720, marginBottom: 'clamp(40px,5vw,64px)' }}>
-          <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>04 — The Product</div>
-          <h2 style={{ fontFamily: serif, fontWeight: 300, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.02em', color: '#29261F' }}>One workspace, <span style={{ fontStyle: 'italic' }}>every angle</span> of the project.</h2>
-          <p style={{ margin: '22px 0 0', fontSize: 16, color: '#8B8275' }}>Switch modules in the sidebar — every workflow is live and interactive.</p>
+          <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>04, The Product</div>
+          <h2 style={{ fontFamily: serif, fontWeight: 800, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.02em', color: '#29261F' }}>One workspace, <span style={{ color: '#B17A57' }}>every angle</span> of the project.</h2>
+          <p style={{ margin: '22px 0 0', fontSize: 16, color: '#8B8275' }}>Switch modules in the sidebar, every workflow is live and interactive.</p>
         </div>
 
         <div data-reveal="1" data-reveal-delay="0.08" style={{ background: '#FCFAF6', border: '1px solid #E6E0D4', borderRadius: 22, overflow: 'hidden', boxShadow: '0 2px 6px rgba(41,38,31,.03), 0 50px 90px -50px rgba(41,38,31,.35)' }}>
@@ -80,7 +80,7 @@ export default function ProductShowcase() {
                   <button key={label} onClick={() => setTab(i)} style={{
                     display: 'flex', alignItems: 'center', gap: 11, width: '100%', background: active ? '#F1ECE2' : 'transparent',
                     border: 'none', cursor: 'pointer', textAlign: 'left', padding: '9px 11px', borderRadius: 9, margin: '0 0 2px',
-                    fontFamily: "'Hanken Grotesk',sans-serif", fontSize: 13.5, fontWeight: active ? 600 : 500,
+                    fontFamily: "'Inter',system-ui,sans-serif", fontSize: 13.5, fontWeight: active ? 600 : 500,
                     color: active ? '#29261F' : '#8B8275', transition: 'background .25s, color .25s',
                   }}>
                     <span style={{ width: 22, height: 22, borderRadius: 6, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, lineHeight: 1, background: active ? '#29261F' : '#ECE6DA', color: active ? '#F6F4EF' : '#A79E90', transition: 'background .25s, color .25s' }}>{MODULE_GLYPHS[i]}</span>
@@ -96,7 +96,7 @@ export default function ProductShowcase() {
               </div>
             </div>
 
-            {/* content — only the active module is mounted (so Documents replays its settle animation) */}
+            {/* content, only the active module is mounted (so Documents replays its settle animation) */}
             <div style={{ flex: 1, minWidth: 280, padding: '24px 26px', position: 'relative' }}>
               {tab === 0 && <PMPanel />}
               {tab === 1 && <ProcPanel vendors={vendors} displayBudget={displayBudget} setVendor={setVendor} />}
@@ -115,14 +115,14 @@ const panelIn: React.CSSProperties = { animation: 'panelIn .45s cubic-bezier(.2,
 // approval thumbnails by id: Facade, Lighting, Material schedule, Kitchen
 const APPROVAL_SCENES: Record<number, SceneKind> = { 1: 'facade', 2: 'lighting', 3: 'schedule', 4: 'kitchen' }
 const headTag = (s: string) => <div style={{ fontFamily: mono, fontSize: 10, letterSpacing: '.14em', color: '#A79E90', marginBottom: 6 }}>{s}</div>
-const h3 = (s: string) => <h3 style={{ fontFamily: serif, fontWeight: 300, fontSize: 30, letterSpacing: '-0.02em', color: '#29261F' }}>{s}</h3>
+const h3 = (s: string) => <h3 style={{ fontFamily: serif, fontWeight: 800, fontSize: 30, letterSpacing: '-0.02em', color: '#29261F' }}>{s}</h3>
 
 /* ── Module 1: Project Management ── */
 function PMPanel() {
   const stat = (label: string, value: string, color: string) => (
     <div className="stat-card" style={{ background: '#F1ECE2', border: '1px solid #EAE3D5', borderRadius: 13, padding: 15, cursor: 'default' }}>
       <div style={{ fontFamily: mono, fontSize: 9.5, letterSpacing: '.1em', color: '#8B8275' }}>{label}</div>
-      <div style={{ fontFamily: serif, fontWeight: 300, fontSize: 38, color, marginTop: 4 }}>{value}</div>
+      <div style={{ fontFamily: serif, fontWeight: 800, fontSize: 38, color, marginTop: 4 }}>{value}</div>
     </div>
   )
   const proj = (scene: SceneKind, name: string, w: string, color: string, pct: string) => (
@@ -159,7 +159,7 @@ function PMPanel() {
           <div style={{ fontSize: 12.5, fontWeight: 600, color: '#29261F', marginBottom: 13 }}>Activity</div>
           {act('#7E866A', 'Client approved facade design', '12 MIN AGO')}
           {act('#B17A57', 'New quotation uploaded', '1 HR AGO')}
-          {act('#C9BFAE', 'Site update — foundation poured', '3 HR AGO')}
+          {act('#C9BFAE', 'Site update, foundation poured', '3 HR AGO')}
         </div>
       </div>
     </div>
@@ -174,7 +174,7 @@ function ProcPanel({ vendors, displayBudget, setVendor }: { vendors: VendorSel; 
         <div>{headTag('SELECT VENDORS · LIVE BUDGET')}{h3('Procurement')}</div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontFamily: mono, fontSize: 9.5, letterSpacing: '.1em', color: '#8B8275' }}>ESTIMATED BUDGET</div>
-          <div style={{ fontFamily: serif, fontWeight: 300, fontSize: 34, color: '#29261F', lineHeight: 1 }}>{fmtL(displayBudget)}</div>
+          <div style={{ fontFamily: serif, fontWeight: 800, fontSize: 34, color: '#29261F', lineHeight: 1 }}>{fmtL(displayBudget)}</div>
         </div>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(252px,1fr))', gap: 12 }}>
@@ -236,7 +236,7 @@ function DocsPanel() {
         <div style={{ flex: 1, minWidth: 220, background: '#FCFAF6', border: '1px solid #EDE7DB', borderRadius: 14, padding: 14, height: 232 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}><span style={{ fontFamily: mono, fontSize: 9, letterSpacing: '.1em', color: '#7E866A' }}>ORGANIZED · RIVERSIDE</span></div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {settle('translate(-90px,-40px) rotate(-12deg)', '.05s', '#E0D7C7', 'Floor Plans — Rev C.pdf', 'DRAWINGS', '#7E866A')}
+            {settle('translate(-90px,-40px) rotate(-12deg)', '.05s', '#E0D7C7', 'Floor Plans, Rev C.pdf', 'DRAWINGS', '#7E866A')}
             {settle('translate(110px,-20px) rotate(10deg)', '.16s', '#D6C9B2', 'Quotation_Marble.xlsx', 'QUOTES', '#8B8275')}
             {settle('translate(-70px,40px) rotate(8deg)', '.27s', '#C9BFAE', 'Contract_Signed.pdf', 'LEGAL', '#8B8275')}
             {settle('translate(90px,40px) rotate(-9deg)', '.38s', '#D9C6A6', 'Render_Living_v3.jpg', 'RENDERS', '#8B8275')}
@@ -271,8 +271,8 @@ function ApprovalsPanel({ approvals, historyOpen, setStatus, toggleHistory }: {
                 <div style={{ flex: 1, minWidth: 0 }}><div style={{ fontSize: 14, fontWeight: 600, color: '#29261F' }}>{a.title}</div><div style={{ fontFamily: mono, fontSize: 9.5, color: '#A79E90', marginTop: 4 }}>{a.meta}</div></div>
                 {pending && (
                   <div style={{ display: 'flex', gap: 8, flex: 'none' }}>
-                    <button className="btn-reject" onClick={() => setStatus(a.id, 'rejected')} style={{ border: '1px solid #E0D7C7', background: '#FCFAF6', color: '#8B8275', fontFamily: "'Hanken Grotesk',sans-serif", fontSize: 11.5, fontWeight: 600, padding: '7px 13px', borderRadius: 999, cursor: 'pointer' }}>Request changes</button>
-                    <button className="btn-approve" onClick={() => setStatus(a.id, 'approved')} style={{ border: 'none', background: '#29261F', color: '#F6F4EF', fontFamily: "'Hanken Grotesk',sans-serif", fontSize: 11.5, fontWeight: 600, padding: '7px 15px', borderRadius: 999, cursor: 'pointer' }}>Approve</button>
+                    <button className="btn-reject" onClick={() => setStatus(a.id, 'rejected')} style={{ border: '1px solid #E0D7C7', background: '#FCFAF6', color: '#8B8275', fontFamily: "'Inter',system-ui,sans-serif", fontSize: 11.5, fontWeight: 600, padding: '7px 13px', borderRadius: 999, cursor: 'pointer' }}>Request changes</button>
+                    <button className="btn-approve" onClick={() => setStatus(a.id, 'approved')} style={{ border: 'none', background: '#29261F', color: '#F6F4EF', fontFamily: "'Inter',system-ui,sans-serif", fontSize: 11.5, fontWeight: 600, padding: '7px 15px', borderRadius: 999, cursor: 'pointer' }}>Approve</button>
                   </div>
                 )}
                 <span style={{ background: chip.bg, color: chip.c, fontSize: 11, fontWeight: 600, padding: '6px 13px', borderRadius: 999, flex: 'none', whiteSpace: 'nowrap' }}>{chip.t}</span>
@@ -318,7 +318,7 @@ function SitePanel() {
         <div style={{ flex: 1, minWidth: 220, background: '#FCFAF6', border: '1px solid #EDE7DB', borderRadius: 14, padding: 14 }}>
           <div style={{ fontSize: 12.5, fontWeight: 600, color: '#29261F', marginBottom: 12 }}>Issue tracker</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-            {issue('#A4593F', 'Plumbing clash — Level 1', 'OPEN')}
+            {issue('#A4593F', 'Plumbing clash, Level 1', 'OPEN')}
             {issue('#B17A57', 'Tile sample mismatch', 'REVIEW')}
             {issue('#7E866A', 'Site measurements verified', 'CLOSED')}
             {issue('#7E866A', 'Electrical rough-in approved', 'CLOSED')}

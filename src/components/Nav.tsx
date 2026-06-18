@@ -5,7 +5,7 @@ export default function Nav() {
       backdropFilter: 'saturate(140%) blur(14px)', WebkitBackdropFilter: 'saturate(140%) blur(14px)',
       background: 'rgba(246,244,239,.72)', borderBottom: '1px solid rgba(228,222,210,.7)',
     }}>
-      <nav style={{ maxWidth: 1240, margin: '0 auto', padding: '18px 40px', display: 'flex', alignItems: 'center', gap: 32 }}>
+      <nav style={{ width: '100%', padding: '18px clamp(20px,4vw,56px)', display: 'flex', alignItems: 'center', gap: 32 }}>
         <a href="#top" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', marginRight: 'auto' }}>
           <img src="/assets/byld-logo.png" alt="BYLD Space" style={{ height: 24, display: 'block' }} />
         </a>
