@@ -109,7 +109,27 @@ export function Scene({ kind }: { kind: SceneKind }) {
         </Frame>
       )
     }
-    case 'interior':
+    case 'interior': {
+      // an armchair + floor lamp on a rug — reads clearly as furniture / interiors
+      return (
+        <Frame from="#E5DBC9" to="#CFC0A4">
+          <line x1="10" y1="94" x2="110" y2="94" stroke={ink} strokeWidth="1.1" opacity="0.4" />
+          <ellipse cx="54" cy="95" rx="42" ry="4.5" fill="rgba(59,54,44,0.10)" />
+          {/* armchair */}
+          <rect x="37" y="42" width="40" height="30" rx="10" fill={soft} />
+          <rect x="26" y="55" width="12" height="30" rx="6" fill="rgba(59,54,44,0.22)" />
+          <rect x="76" y="55" width="12" height="30" rx="6" fill="rgba(59,54,44,0.22)" />
+          <rect x="38" y="62" width="38" height="14" rx="5" fill={clay} opacity="0.42" />
+          <rect x="37" y="42" width="40" height="30" rx="10" fill="none" stroke={ink} strokeWidth="1" opacity="0.34" />
+          <line x1="31" y1="85" x2="29" y2="92" stroke={ink} strokeWidth="1.1" opacity="0.45" />
+          <line x1="83" y1="85" x2="85" y2="92" stroke={ink} strokeWidth="1.1" opacity="0.45" />
+          {/* floor lamp */}
+          <line x1="100" y1="92" x2="100" y2="52" stroke={ink} strokeWidth="1.1" opacity="0.5" />
+          <path d="M92 52 L108 52 L104 41 L96 41 Z" fill={soft} stroke={ink} strokeWidth="1" opacity="0.85" />
+          <circle cx="100" cy="56" r="3" fill={clay} opacity="0.55" />
+        </Frame>
+      )
+    }
     case 'lighting': {
       return (
         <Frame from="#E5DBC9" to="#CFC0A4">
@@ -118,9 +138,8 @@ export function Scene({ kind }: { kind: SceneKind }) {
           <line x1="31" y1="26" x2="31" y2="66" stroke={ink} strokeWidth="0.8" opacity="0.3" />
           <rect x="60" y="62" width="46" height="22" rx="4" fill={soft} />
           <rect x="60" y="56" width="46" height="10" rx="4" fill="rgba(59,54,44,0.22)" />
-          {kind === 'lighting'
-            ? <><line x1="84" y1="10" x2="84" y2="30" stroke={ink} strokeWidth="0.9" opacity="0.4" /><circle cx="84" cy="34" r="6" fill={clay} opacity="0.5" /></>
-            : <><rect x="92" y="58" width="10" height="26" fill="rgba(59,54,44,0.12)" /><circle cx="20" cy="74" r="5" fill={clay} opacity="0.4" /></>}
+          <line x1="84" y1="10" x2="84" y2="30" stroke={ink} strokeWidth="0.9" opacity="0.4" />
+          <circle cx="84" cy="34" r="6" fill={clay} opacity="0.5" />
         </Frame>
       )
     }
@@ -138,14 +157,32 @@ export function Scene({ kind }: { kind: SceneKind }) {
       )
     }
     case 'build': {
+      // a tower crane lifting a load over a building under construction
       return (
         <Frame from="#DCD2BF" to="#C3B496">
-          <line x1="24" y1="108" x2="24" y2="24" stroke={ink} strokeWidth="1.4" opacity="0.45" />
-          <line x1="24" y1="24" x2="86" y2="24" stroke={ink} strokeWidth="1.4" opacity="0.45" />
-          <line x1="86" y1="24" x2="86" y2="40" stroke={ink} strokeWidth="1" opacity="0.4" />
-          <line x1="24" y1="40" x2="100" y2="40" stroke={ink} strokeWidth="1" opacity="0.3" />
-          {[0, 1, 2].map((i) => <line key={i} x1="24" y1={56 + i * 18} x2="100" y2={56 + i * 18} stroke={ink} strokeWidth="1" opacity="0.25" />)}
-          <rect x="78" y="92" width="22" height="16" fill={clay} opacity="0.4" />
+          <line x1="10" y1="96" x2="110" y2="96" stroke={ink} strokeWidth="1.2" opacity="0.42" />
+          {/* built lower floors */}
+          <rect x="22" y="56" width="40" height="40" fill="rgba(59,54,44,0.10)" />
+          <rect x="22" y="56" width="40" height="40" fill="none" stroke={ink} strokeWidth="1" opacity="0.42" />
+          <line x1="22" y1="69" x2="62" y2="69" stroke={ink} strokeWidth="0.8" opacity="0.3" />
+          <line x1="22" y1="82" x2="62" y2="82" stroke={ink} strokeWidth="0.8" opacity="0.3" />
+          <rect x="28" y="60" width="8" height="6" fill={soft} /><rect x="48" y="60" width="8" height="6" fill={soft} />
+          <rect x="28" y="73" width="8" height="6" fill={soft} /><rect x="48" y="73" width="8" height="6" fill={soft} />
+          <rect x="28" y="86" width="8" height="6" fill={soft} /><rect x="48" y="86" width="8" height="6" fill={soft} />
+          {/* top floor still framing up */}
+          <g stroke={ink} strokeWidth="1" opacity="0.4">
+            <line x1="22" y1="56" x2="22" y2="47" /><line x1="42" y1="56" x2="42" y2="47" /><line x1="62" y1="56" x2="62" y2="47" />
+            <line x1="20" y1="47" x2="64" y2="47" />
+          </g>
+          {/* tower crane */}
+          <line x1="80" y1="96" x2="80" y2="26" stroke={ink} strokeWidth="1.5" opacity="0.5" />
+          <line x1="40" y1="30" x2="106" y2="30" stroke={ink} strokeWidth="1.3" opacity="0.5" />
+          <line x1="80" y1="22" x2="40" y2="30" stroke={ink} strokeWidth="0.9" opacity="0.42" />
+          <line x1="80" y1="22" x2="106" y2="30" stroke={ink} strokeWidth="0.9" opacity="0.42" />
+          <rect x="100" y="30" width="6" height="6" fill="rgba(59,54,44,0.3)" />
+          <rect x="76" y="30" width="8" height="6" fill="rgba(59,54,44,0.16)" />
+          <line x1="50" y1="30" x2="50" y2="48" stroke={ink} strokeWidth="0.8" opacity="0.45" />
+          <rect x="45" y="48" width="11" height="7" fill={clay} opacity="0.55" />
         </Frame>
       )
     }

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { ACCENT, FEATURES, type FeatureKey } from '../data'
 import { Scene, type SceneKind } from './Imagery'
 import { RoleIcon, roleKeyFor } from './RoleIcons'
+import { FileThumb, type FileKind } from './FileThumb'
 
 const mono = "'JetBrains Mono',monospace"
 const serif = "'Inter',system-ui,sans-serif"
@@ -47,18 +48,18 @@ function Preview({ k }: { k: FeatureKey }) {
   }
 
   if (k === 'cd') {
-    const r = (tone: string, name: string, sub: string, latest?: boolean) => (
+    const r = (kind: FileKind, tone: string, name: string, sub: string, latest?: boolean) => (
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#F4EFE6', borderRadius: 10, padding: '11px 13px' }}>
-        <div style={{ width: 26, height: 32, borderRadius: 3, background: tone }} />
+        <FileThumb kind={kind} tone={tone} w={26} h={32} />
         <div style={{ flex: 1 }}><div style={{ fontSize: 12.5, color: '#29261F', fontWeight: 500 }}>{name}</div><div style={{ fontFamily: mono, fontSize: 9, color: '#A79E90', marginTop: 2 }}>{sub}</div></div>
         {latest && <span style={{ fontSize: 10, color: '#7E866A', fontWeight: 600 }}>Latest</span>}
       </div>
     )
     return (
       <div style={{ ...card, display: 'flex', flexDirection: 'column', gap: 9 }}>
-        {r('#E0D7C7', 'Floor Plans, Rev C.pdf', 'UPDATED 2H AGO', true)}
-        {r('#D6C9B2', 'Quotation_Marble.xlsx', '3 VERSIONS')}
-        {r('#C9BFAE', 'Contract_Signed.pdf', 'LOCKED')}
+        {r('plan', '#E0D7C7', 'Floor Plans, Rev C.pdf', 'UPDATED 2H AGO', true)}
+        {r('sheet', '#D6C9B2', 'Quotation_Marble.xlsx', '3 VERSIONS')}
+        {r('contract', '#C9BFAE', 'Contract_Signed.pdf', 'LOCKED')}
       </div>
     )
   }

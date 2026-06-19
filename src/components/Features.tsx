@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { ACCENT, FEATURES } from '../data'
 import { Scene, type SceneKind } from './Imagery'
 import { RoleIcon, roleKeyFor } from './RoleIcons'
+import { FileThumb, type FileKind } from './FileThumb'
 
 const mono = "'JetBrains Mono',monospace"
 const serif = "'Inter',system-ui,sans-serif"
@@ -38,9 +39,9 @@ const bar = (label: string, w: string, color: string) => (
   </div>
 )
 
-const fileRow = (tone: string, name: string, sub: string) => (
+const fileRow = (kind: FileKind, tone: string, name: string, sub: string) => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 11, background: '#FCFAF6', borderRadius: 9, padding: '9px 11px' }}>
-    <div style={{ width: 24, height: 30, borderRadius: 3, background: tone, flex: 'none' }} />
+    <FileThumb kind={kind} tone={tone} />
     <div style={{ flex: 1 }}><div style={{ fontSize: 11, color: '#29261F', fontWeight: 500 }}>{name}</div><div style={{ fontFamily: mono, fontSize: 9, color: '#A79E90', marginTop: 2 }}>{sub}</div></div>
   </div>
 )
@@ -79,9 +80,9 @@ export default function Features({ onOpen }: { onOpen: (i: number) => void }) {
     </div>,
     // CD, files
     <div style={pad({ gap: 8 })}>
-      {fileRow('#E0D7C7', 'Floor Plans, Rev C.pdf', 'UPDATED 2H AGO')}
-      {fileRow('#D6C9B2', 'Quotation_Marble.xlsx', 'LATEST VERSION')}
-      {fileRow('#C9BFAE', 'Contract_Signed.pdf', 'LOCKED')}
+      {fileRow('plan', '#E0D7C7', 'Floor Plans, Rev C.pdf', 'UPDATED 2H AGO')}
+      {fileRow('sheet', '#D6C9B2', 'Quotation_Marble.xlsx', 'LATEST VERSION')}
+      {fileRow('contract', '#C9BFAE', 'Contract_Signed.pdf', 'LOCKED')}
     </div>,
     // AR, approvals
     <div style={pad({ justifyContent: 'center', gap: 11 })}>
