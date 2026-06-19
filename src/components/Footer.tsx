@@ -8,8 +8,12 @@ export default function Footer() {
           <img src="/assets/byld-logo.png" alt="BYLD Space" style={{ height: 24, marginBottom: 20 }} />
           <p style={{ fontSize: 14.5, lineHeight: 1.62, color: '#8B8275' }}>The workspace built for modern architecture and interior firms. Projects, collaboration, documents and talent, together in one place.</p>
           <div style={{ display: 'flex', gap: 10, marginTop: 24 }}>
-            {['in', 'ig', 'x'].map((s) => (
-              <a key={s} href="#" aria-label={s} className="social" style={{ width: 38, height: 38, borderRadius: '50%', border: '1px solid #DDD4C5', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: '#8B8275', fontFamily: mono, fontSize: 11 }}>{s}</a>
+            {[
+              { s: 'in', label: 'LinkedIn', href: 'https://www.linkedin.com/company/byld-space/' },
+              { s: 'ig', label: 'Instagram', href: 'https://www.instagram.com/byldspace' },
+              { s: 'x', label: 'X', href: 'https://x.com/byldspace' },
+            ].map(({ s, label, href }) => (
+              <a key={s} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="social" style={{ width: 38, height: 38, borderRadius: '50%', border: '1px solid #DDD4C5', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', color: '#8B8275', fontFamily: mono, fontSize: 11 }}>{s}</a>
             ))}
           </div>
         </div>
