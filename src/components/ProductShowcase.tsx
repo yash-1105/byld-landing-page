@@ -50,7 +50,7 @@ export default function ProductShowcase() {
     <section id="product" style={{ scrollMarginTop: 90, background: '#F1ECE2', borderTop: '1px solid #E8E2D6', borderBottom: '1px solid #E8E2D6' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(80px,10vw,140px) 40px' }}>
         <div data-reveal="1" style={{ maxWidth: 720, marginBottom: 'clamp(40px,5vw,64px)' }}>
-          <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>04, The Product</div>
+          <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>02 - The Product</div>
           <h2 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.025em', color: '#8B8275' }}>One workspace, <span style={{ color: '#B17A57' }}>every angle</span> of the project.</h2>
           <p style={{ margin: '22px 0 0', fontSize: 16, color: '#8B8275' }}>Switch modules in the sidebar, every workflow is live and interactive.</p>
         </div>

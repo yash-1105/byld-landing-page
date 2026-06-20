@@ -18,7 +18,7 @@ export default function BYLDFlex() {
   return (
     <section id="flex" style={{ scrollMarginTop: 90, position: 'relative', maxWidth: 1240, margin: '0 auto', padding: 'clamp(80px,10vw,140px) 40px', display: 'flex', flexWrap: 'wrap', gap: 'clamp(40px,6vw,72px)' }}>
       <div data-reveal="1" style={{ flex: '1 1 340px', minWidth: 300 }}>
-        <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>05, BYLD Flex</div>
+        <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>03 - BYLD Flex</div>
         <h2 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.025em', color: '#8B8275' }}>Flexible talent, <span style={{ color: '#B17A57' }}>when you need it</span></h2>
         <p style={{ margin: '30px 0 0', maxWidth: 420, fontSize: 18, lineHeight: 1.65, color: '#5C564B' }}>Scale your team without the overhead of permanent hiring.</p>
         <p style={{ margin: '20px 0 0', maxWidth: 420, fontSize: 18, lineHeight: 1.65, color: '#5C564B' }}>Through BYLD Flex, firms can access trusted architecture and design talent for short-term support, specialized tasks, and project-based requirements.</p>

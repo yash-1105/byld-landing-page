@@ -17,7 +17,7 @@ export default function TargetAudience() {
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(80px,10vw,140px) 40px' }}>
         <div data-reveal="1" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 30, marginBottom: 'clamp(40px,5vw,64px)' }}>
           <div style={{ maxWidth: 560 }}>
-            <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>06, Who it's for</div>
+            <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>04 - Who it's for</div>
             <h2 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(32px,4.4vw,56px)', lineHeight: 1.06, letterSpacing: '-0.025em', color: '#8B8275' }}>Built for <span style={{ color: '#B17A57' }}>growing firms</span></h2>
           </div>
           <p style={{ maxWidth: 380, fontSize: 17, lineHeight: 1.62, color: '#5C564B' }}>Whether you're managing residential projects or coordinating multiple teams, BYLD Space helps simplify the way projects are delivered.</p>

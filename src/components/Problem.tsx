@@ -1,63 +1,119 @@
-import type { ReactNode } from 'react'
-import { WhatsAppLogo, ExcelLogo, DriveLogo, GmailLogo } from './BrandLogos'
+import { useEffect, useRef, useState } from 'react'
+import { prefersReducedMotion } from '../hooks/useInteractions'
 
-const mono = "'JetBrains Mono',monospace"
-const serif = "'Inter',system-ui,sans-serif"
 
-const tileBase = (rot: number): React.CSSProperties => ({
-  aspectRatio: '1', borderRadius: 14, background: '#FCFAF6', border: '1px dashed #D8CDBA',
-  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10,
-  transform: `rotate(${rot}deg)`,
+const VIDEO = '/assets/the-problem.mp4'              // desktop: 16:9, all-intra so seeks paint instantly
+const POSTER = '/assets/the-problem-poster.jpg'
+const MOBILE_VIDEO = '/assets/the-problem-phone.mp4' // mobile: vertical 9:16, all-intra
+const MOBILE_POSTER = '/assets/the-problem-phone-poster.jpg'
+
+const clamp = (n: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, n))
+const matchMobile = () => typeof window !== 'undefined' && window.matchMedia('(max-width: 820px)').matches
+
+// the video animation is the section: warm cloth bg, headline, the five tools, then
+// the resolve into the BYLD Space dashboard. all copy is baked into the clip.
+const cardStyle = (mobile: boolean): React.CSSProperties => ({
+  position: 'relative', width: '100%', maxWidth: mobile ? 440 : 1180, margin: '0 auto',
+  aspectRatio: mobile ? '9 / 16' : '16 / 9', borderRadius: 18, overflow: 'hidden',
+  background: '#E3D8CA', boxShadow: '0 40px 80px -42px rgba(41,38,31,.42)',
+  border: '1px solid #E8E2D6',
 })
-
-function ToolTile({ rot, logo, label }: { rot: number; logo: ReactNode; label: string }) {
-  return (
-    <div className="tool-tile" style={tileBase(rot)}>
-      {logo}
-      <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: '.08em', color: '#8B8275' }}>{label}</span>
-    </div>
-  )
-}
+const fill: React.CSSProperties = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }
 
 export default function Problem() {
-  return (
-    <section style={{ background: '#F1ECE2', borderTop: '1px solid #E8E2D6', borderBottom: '1px solid #E8E2D6' }}>
-      <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px,9vw,128px) 40px', display: 'flex', flexWrap: 'wrap', gap: 'clamp(40px,6vw,88px)' }}>
-        <div data-reveal="1" style={{ flex: '1 1 420px', minWidth: 300 }}>
-          <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: '#A79E90', marginBottom: 24 }}>02, The Problem</div>
-          <h2 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(32px,4.4vw,58px)', lineHeight: 1.06, letterSpacing: '-0.025em', color: '#8B8275' }}>
-            Stop managing projects across <span style={{ color: '#B17A57' }}>five different tools.</span>
-          </h2>
-          <p style={{ margin: '32px 0 0', maxWidth: 430, fontSize: 18, lineHeight: 1.65, color: '#5C564B' }}>
-            Projects shouldn't live across WhatsApp, Excel, Google Drive, emails, and endless follow-ups.
-          </p>
-          <p style={{ margin: '20px 0 0', maxWidth: 430, fontSize: 18, lineHeight: 1.65, color: '#5C564B' }}>
-            BYLD Space brings your projects, files, communication, and approvals together in one organized workspace.
-          </p>
-        </div>
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [reduce] = useState(prefersReducedMotion)
+  const [mobile, setMobile] = useState(matchMobile)
 
-        <div data-reveal="1" data-reveal-delay="0.1" style={{ flex: '1 1 420px', minWidth: 300, display: 'flex', alignItems: 'center', gap: 'clamp(12px,2.4vw,30px)' }}>
-          <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-            <ToolTile rot={-4} logo={<WhatsAppLogo />} label="WhatsApp" />
-            <ToolTile rot={3} logo={<ExcelLogo />} label="Excel" />
-            <ToolTile rot={2} logo={<DriveLogo />} label="Drive" />
-            <ToolTile rot={-3} logo={<GmailLogo />} label="Gmail" />
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 820px)')
+    const onChange = () => setMobile(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  // Scrub the clip's currentTime to scroll position while the card is pinned.
+  // Same approach as the hero; the clip is all-intra so seeks paint immediately.
+  useEffect(() => {
+    if (reduce) return
+    const section = sectionRef.current
+    const video = videoRef.current
+    if (!section || !video) return
+
+    let duration = video.duration || 0
+    const onMeta = () => { duration = video.duration || 0 }
+    video.addEventListener('loadedmetadata', onMeta)
+
+    // prime decode on touch devices so seeked frames actually paint
+    const prime = () => { video.muted = true; const p = video.play(); if (p) p.then(() => video.pause()).catch(() => {}) }
+    prime()
+    const onFirst = () => prime()
+    window.addEventListener('touchstart', onFirst, { passive: true, once: true })
+
+    let target = 0
+    const compute = () => {
+      const rect = section.getBoundingClientRect()
+      const span = rect.height - window.innerHeight
+      const p = span > 0 ? clamp(-rect.top / span, 0, 1) : 0
+      target = p * (duration || 0)
+    }
+
+    let raf = 0
+    const tick = () => {
+      if (duration) {
+        const diff = target - video.currentTime
+        if (Math.abs(diff) > 0.003) video.currentTime += diff * 0.18
+      }
+      raf = requestAnimationFrame(tick)
+    }
+
+    compute()
+    raf = requestAnimationFrame(tick)
+    const onScroll = () => compute()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('touchstart', onFirst)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      video.removeEventListener('loadedmetadata', onMeta)
+    }
+  }, [reduce, mobile])
+
+  const shell: React.CSSProperties = {
+    background: '#F1ECE2', borderTop: '1px solid #E8E2D6', borderBottom: '1px solid #E8E2D6',
+  }
+
+  const src = mobile ? MOBILE_VIDEO : VIDEO
+  const poster = mobile ? MOBILE_POSTER : POSTER
+
+  // ── reduced-motion: static representative frame, normal scroll ──
+  if (reduce) {
+    return (
+      <section style={shell}>
+        <div style={{ maxWidth: 1240, margin: '0 auto', padding: 'clamp(72px,9vw,128px) 40px' }} data-reveal="1">
+          <div style={cardStyle(mobile)}>
+            <img src={poster} alt="BYLD Space brings projects, files, communication, and approvals together in one organized workspace." style={fill} />
           </div>
-          <div style={{ flex: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, color: '#B17A57' }}>
-            <span style={{ fontFamily: mono, fontSize: 20 }}>→</span>
-          </div>
-          <div data-tilt="7" style={{ flex: '1.05', aspectRatio: '.92', borderRadius: 18, background: '#29261F', boxShadow: '0 30px 60px -28px rgba(41,38,31,.5)', padding: 18, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'transform .3s ease' }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}><span style={{ width: 7, height: 7, borderRadius: '50%', background: '#7E866A' }} /><span style={{ fontFamily: mono, fontSize: 9.5, letterSpacing: '.14em', color: '#A79E90' }}>BYLD SPACE</span></div>
-              <div style={{ height: 7, width: '85%', background: 'rgba(246,244,239,.22)', borderRadius: 4, marginBottom: 9 }} />
-              <div style={{ height: 7, width: '62%', background: 'rgba(246,244,239,.14)', borderRadius: 4, marginBottom: 9 }} />
-              <div style={{ height: 7, width: '74%', background: 'rgba(246,244,239,.14)', borderRadius: 4 }} />
-            </div>
-            <div style={{ display: 'flex', gap: 7 }}>
-              <div style={{ flex: 1, height: 30, borderRadius: 8, background: 'rgba(246,244,239,.08)' }} />
-              <div style={{ flex: 1, height: 30, borderRadius: 8, background: 'rgba(246,244,239,.08)' }} />
-              <div style={{ flex: 1, height: 30, borderRadius: 8, background: 'rgba(177,122,87,.45)' }} />
-            </div>
+        </div>
+      </section>
+    )
+  }
+
+  // ── pinned, scroll-scrubbed video card ──
+  // tall section gives the scrub distance; the card stays centered while it plays.
+  return (
+    <section ref={sectionRef} style={{ ...shell, height: mobile ? '260vh' : '320vh' }}>
+      <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'hidden' }}>
+        <div style={{ width: '100%', maxWidth: 1240, margin: '0 auto', padding: '0 clamp(22px,5vw,40px)' }}>
+          <div style={cardStyle(mobile)}>
+            <video
+              key={src} ref={videoRef} src={src} poster={poster}
+              muted playsInline preload="auto"
+              style={fill}
+            />
           </div>
         </div>
       </div>
