@@ -29,9 +29,9 @@ export default function Hero() {
     return () => mq.removeEventListener('change', onChange)
   }, [])
 
-  // Scrub the video's currentTime to scroll position while the hero is pinned.
-  // Mobile uses a vertical all-intra clip; it must be "primed" with a muted
-  // play->pause so iOS/Android will actually decode and paint seeked frames.
+  // Scrub video currentTime to scroll position while the hero is pinned.
+  // Mobile: direct seek on scroll (no RAF loop) + prime only on first touch gesture.
+  // Desktop: smooth lerp via RAF loop.
   useEffect(() => {
     if (reduce) return
     const section = sectionRef.current
@@ -42,24 +42,71 @@ export default function Hero() {
     const onMeta = () => { duration = video.duration || 0 }
     video.addEventListener('loadedmetadata', onMeta)
 
-    let cleanupPrime = () => {}
-    if (mobile) {
-      const prime = () => { video.muted = true; const p = video.play(); if (p) p.then(() => video.pause()).catch(() => {}) }
-      prime()
-      const onFirst = () => prime() // iOS sometimes only paints after a real gesture
-      window.addEventListener('touchstart', onFirst, { passive: true, once: true })
-      cleanupPrime = () => window.removeEventListener('touchstart', onFirst)
-    }
-
-    let target = 0 // desired currentTime, lerped toward each frame for buttery scrubbing
+    let target = 0
+    let prog = 0
     const compute = () => {
       const rect = section.getBoundingClientRect()
       const span = rect.height - window.innerHeight
-      const p = span > 0 ? clamp(-rect.top / span, 0, 1) : 0
-      setProgress(p)
-      target = p * (duration || 0)
+      prog = span > 0 ? clamp(-rect.top / span, 0, 1) : 0
+      target = prog * (duration || 0)
     }
 
+    if (mobile) {
+      // iOS unlocks video decoding on a user gesture. Prime by *seeking* within the
+      // gesture — NOT play()/pause(): play() let the clip visibly run forward until the
+      // (async) pause landed, which read as the video auto-playing on page open.
+      let primed = false
+      const prime = () => {
+        if (primed) return
+        primed = true
+        video.muted = true
+        compute()
+        if (duration) video.currentTime = target
+      }
+      window.addEventListener('touchstart', prime, { passive: true, once: true })
+
+      // Coalesce work to one frame: setting currentTime on every scroll event (and
+      // re-rendering via setProgress each event) thrashes the decoder and lags. Recompute
+      // + repaint at most once per rAF, and never issue a new seek while one is in flight.
+      let dirty = false
+      let needSeek = false
+      let seeking = false
+      const onSeeked = () => { seeking = false }
+      video.addEventListener('seeked', onSeeked)
+
+      const onScroll = () => { dirty = true }
+      let raf = 0
+      const loop = () => {
+        if (dirty) {
+          dirty = false
+          compute()
+          setProgress(prog)
+          needSeek = true
+        }
+        if (needSeek && !seeking && duration && Math.abs(target - video.currentTime) > 0.01) {
+          needSeek = false
+          seeking = true
+          video.currentTime = target
+        }
+        raf = requestAnimationFrame(loop)
+      }
+      compute()
+      setProgress(prog)
+      if (duration) video.currentTime = target
+      raf = requestAnimationFrame(loop)
+      window.addEventListener('scroll', onScroll, { passive: true })
+      window.addEventListener('resize', onScroll)
+      return () => {
+        cancelAnimationFrame(raf)
+        window.removeEventListener('touchstart', prime)
+        window.removeEventListener('scroll', onScroll)
+        window.removeEventListener('resize', onScroll)
+        video.removeEventListener('seeked', onSeeked)
+        video.removeEventListener('loadedmetadata', onMeta)
+      }
+    }
+
+    // Desktop: smooth lerp via RAF
     let raf = 0
     const tick = () => {
       if (duration) {
@@ -68,15 +115,14 @@ export default function Hero() {
       }
       raf = requestAnimationFrame(tick)
     }
-
     compute()
+    setProgress(prog)
     raf = requestAnimationFrame(tick)
-    const onScroll = () => compute()
+    const onScroll = () => { compute(); setProgress(prog) }
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
     return () => {
       cancelAnimationFrame(raf)
-      cleanupPrime()
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
       video.removeEventListener('loadedmetadata', onMeta)
@@ -102,7 +148,7 @@ export default function Hero() {
         </span>
       </div>
 
-      <h1 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(40px,6.4vw,86px)', lineHeight: 1.04, letterSpacing: '-0.03em', color: '#F6F4EF', overflowWrap: 'break-word' }}>
+      <h1 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(30px,4.1vw,56px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#F6F4EF', overflowWrap: 'break-word' }}>
         The workspace built for <span style={{ color: '#E4B488' }}>modern architecture</span> and interior firms.
       </h1>
 
