@@ -7,7 +7,7 @@ const serif = "'Inter',system-ui,sans-serif"
 
 const VIDEO = '/assets/hero-villa-2.mp4'                  // desktop: landscape, all-intra
 const POSTER = '/assets/hero-villa-poster.jpg'
-const MOBILE_VIDEO = '/assets/hero-villa-mobile-v2.mp4'  // mobile: vertical 9:16, all-intra
+const MOBILE_VIDEO = '/assets/hero-villa-mobile-v3.mp4'  // mobile: vertical 9:16, 720×1280 all-intra (downscaled from 1080p for cheap per-seek decode)
 const MOBILE_POSTER = '/assets/hero-villa-mobile-poster.jpg'
 
 const clamp = (n: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, n))
