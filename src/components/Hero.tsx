@@ -52,6 +52,16 @@ export default function Hero() {
     }
 
     if (mobile) {
+      // The clip is all-intra (every frame a keyframe), so fastSeek() lands exactly on
+      // the target frame but skips the expensive precise-decode pipeline that plain
+      // currentSeek triggers. On newer iOS Safari that pipeline thrashes hard during
+      // rapid scroll-seeking (frames don't paint, scroll lags). Prefer fastSeek.
+      const canFastSeek = typeof (video as HTMLVideoElement & { fastSeek?: (t: number) => void }).fastSeek === 'function'
+      const seekTo = (t: number) => {
+        if (canFastSeek) (video as HTMLVideoElement & { fastSeek: (t: number) => void }).fastSeek(t)
+        else video.currentTime = t
+      }
+
       // iOS won't decode/paint a *seeked* frame until video playback has been
       // unlocked by a user-gesture-initiated play(). A seek-only prime therefore
       // just drops the poster and paints nothing → a black hero. Unlock with
@@ -77,25 +87,37 @@ export default function Hero() {
       // Coalesce work to one frame: setting currentTime on every scroll event (and
       // re-rendering via setProgress each event) thrashes the decoder and lags. Recompute
       // + repaint at most once per rAF, and never issue a new seek while one is in flight.
+      //
+      // CRITICAL: newer iOS Safari (iPhone 16+) coalesces/drops `seeked` events during
+      // rapid scroll-seeking. If we only clear the in-flight guard on `seeked`, a single
+      // dropped event latches it `true` forever → no further seeks issue → video freezes
+      // ("not rendering") while the overlay keeps moving ("lagging"). A watchdog clears a
+      // stale in-flight seek after SEEK_TIMEOUT_MS so the scrub can never permanently stall.
+      const SEEK_TIMEOUT_MS = 180
+      const FRAME_EPS = 0.04 // ~one 24fps frame: don't re-seek within the same frame
       let dirty = false
-      let needSeek = false
       let seeking = false
+      let seekStartedAt = 0
       const onSeeked = () => { seeking = false }
       video.addEventListener('seeked', onSeeked)
 
-      const onScroll = () => { dirty = true }
+      // touchstart primes on real touch devices; the scroll fallback covers
+      // mouse-wheel scrolling in a narrow (≤820px) desktop window where no
+      // touchstart ever fires. prime() is idempotent, so the double-cover is safe.
+      const onScroll = () => { if (!primed) prime(); dirty = true }
       let raf = 0
-      const loop = () => {
+      const loop = (now: number) => {
         if (dirty) {
           dirty = false
           compute()
           setProgress(prog)
-          needSeek = true
         }
-        if (needSeek && !seeking && duration && Math.abs(target - video.currentTime) > 0.01) {
-          needSeek = false
+        // watchdog: a dropped `seeked` must never freeze the scrub
+        if (seeking && now - seekStartedAt > SEEK_TIMEOUT_MS) seeking = false
+        if (primed && !seeking && duration && Math.abs(target - video.currentTime) > FRAME_EPS) {
           seeking = true
-          video.currentTime = target
+          seekStartedAt = now
+          seekTo(target)
         }
         raf = requestAnimationFrame(loop)
       }
