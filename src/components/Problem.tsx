@@ -45,9 +45,20 @@ export default function Problem() {
     const onMeta = () => { duration = video.duration || 0 }
     video.addEventListener('loadedmetadata', onMeta)
 
-    // prime decode on touch devices so seeked frames actually paint
-    const prime = () => { video.muted = true; const p = video.play(); if (p) p.then(() => video.pause()).catch(() => {}) }
-    prime()
+    // iOS only paints seeked frames after a gesture-initiated play() unlocks the
+    // decoder. play() + a *synchronous* pause() grants that permission without the
+    // clip visibly running forward (the play() promise rejects — swallowed).
+    let primed = false
+    const prime = () => {
+      if (primed) return
+      primed = true
+      video.muted = true
+      try {
+        const p = video.play()
+        video.pause()
+        if (p && p.catch) p.catch(() => {})
+      } catch { /* unlock best-effort */ }
+    }
     const onFirst = () => prime()
     window.addEventListener('touchstart', onFirst, { passive: true, once: true })
 

@@ -52,14 +52,23 @@ export default function Hero() {
     }
 
     if (mobile) {
-      // iOS unlocks video decoding on a user gesture. Prime by *seeking* within the
-      // gesture — NOT play()/pause(): play() let the clip visibly run forward until the
-      // (async) pause landed, which read as the video auto-playing on page open.
+      // iOS won't decode/paint a *seeked* frame until video playback has been
+      // unlocked by a user-gesture-initiated play(). A seek-only prime therefore
+      // just drops the poster and paints nothing → a black hero. Unlock with
+      // play() + a *synchronous* pause(): the gesture grants decode permission,
+      // but pausing in the same tick means the clip never visibly runs forward
+      // (the play() promise rejects with AbortError — swallowed). Then seek so the
+      // frame at the current scroll position actually paints.
       let primed = false
       const prime = () => {
         if (primed) return
         primed = true
         video.muted = true
+        try {
+          const p = video.play()
+          video.pause()
+          if (p && p.catch) p.catch(() => {})
+        } catch { /* unlock best-effort */ }
         compute()
         if (duration) video.currentTime = target
       }
@@ -92,7 +101,8 @@ export default function Hero() {
       }
       compute()
       setProgress(prog)
-      if (duration) video.currentTime = target
+      // don't seek before the gesture unlock (prime) — seeking now would drop the
+      // poster and paint nothing (black). prime() does the first real seek.
       raf = requestAnimationFrame(loop)
       window.addEventListener('scroll', onScroll, { passive: true })
       window.addEventListener('resize', onScroll)
