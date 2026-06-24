@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { prefersReducedMotion } from '../hooks/useInteractions'
 
 
-const VIDEO = '/assets/the-problem.mp4'              // desktop: 16:9, all-intra so seeks paint instantly
-const POSTER = '/assets/the-problem-poster.jpg'
-const MOBILE_VIDEO = '/assets/the-problem-phone.mp4' // mobile: vertical 9:16, all-intra
-const MOBILE_POSTER = '/assets/the-problem-phone-poster.jpg'
+const VIDEO = '/assets/scroll2-desktop.mp4'          // desktop: 16:9, all-intra so seeks paint instantly
+const POSTER = '/assets/scroll2-desktop-poster.jpg'
+const MOBILE_VIDEO = '/assets/scroll2-phone.mp4'     // mobile: vertical 9:16, all-intra
+const MOBILE_POSTER = '/assets/scroll2-phone-poster.jpg'
 
 const clamp = (n: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, n))
 const matchMobile = () => typeof window !== 'undefined' && window.matchMedia('(max-width: 820px)').matches
@@ -15,8 +15,8 @@ const matchMobile = () => typeof window !== 'undefined' && window.matchMedia('(m
 const cardStyle = (mobile: boolean): React.CSSProperties => ({
   position: 'relative', width: '100%', maxWidth: mobile ? 440 : 1180, margin: '0 auto',
   aspectRatio: mobile ? '9 / 16' : '16 / 9', borderRadius: 18, overflow: 'hidden',
-  background: '#E3D8CA', boxShadow: '0 40px 80px -42px rgba(41,38,31,.42)',
-  border: '1px solid #E8E2D6',
+  background: '#CFDED2', boxShadow: '0 40px 80px -42px rgba(41,38,31,.42)',
+  border: '1px solid #DBE3DC',
 })
 const fill: React.CSSProperties = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }
 
@@ -94,7 +94,7 @@ export default function Problem() {
   }, [reduce, mobile])
 
   const shell: React.CSSProperties = {
-    background: '#F1ECE2', borderTop: '1px solid #E8E2D6', borderBottom: '1px solid #E8E2D6',
+    background: '#E7ECE8', borderTop: '1px solid #DBE3DC', borderBottom: '1px solid #DBE3DC',
   }
 
   const src = mobile ? MOBILE_VIDEO : VIDEO
