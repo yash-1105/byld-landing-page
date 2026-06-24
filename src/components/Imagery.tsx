@@ -21,18 +21,18 @@ export function Material({ kind }: { kind: MaterialKind }) {
     const light = ['M-5 30 C 40 26 70 34 125 29', 'M-5 70 C 35 66 80 74 125 69', 'M-5 92 C 40 88 70 96 125 91']
     return (
       <svg style={fill} viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs><linearGradient id={g} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#D2AE7A" /><stop offset="1" stopColor="#A67E48" /></linearGradient></defs>
+        <defs><linearGradient id={g} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#88AC8A" /><stop offset="1" stopColor="#567B57" /></linearGradient></defs>
         <rect width="120" height="120" fill={`url(#${g})`} />
-        <g fill="none" stroke="#7E5C32" strokeWidth="1.1" opacity="0.32">{dark.map((d, i) => <path key={i} d={d} />)}</g>
-        <g fill="none" stroke="#E6CEA1" strokeWidth="0.8" opacity="0.5">{light.map((d, i) => <path key={i} d={d} />)}</g>
-        <ellipse cx="88" cy="52" rx="6" ry="3" fill="none" stroke="#7E5C32" strokeWidth="0.9" opacity="0.3" />
+        <g fill="none" stroke="#3B543B" strokeWidth="1.1" opacity="0.32">{dark.map((d, i) => <path key={i} d={d} />)}</g>
+        <g fill="none" stroke="#ADC6AF" strokeWidth="0.8" opacity="0.5">{light.map((d, i) => <path key={i} d={d} />)}</g>
+        <ellipse cx="88" cy="52" rx="6" ry="3" fill="none" stroke="#3B543B" strokeWidth="0.9" opacity="0.3" />
       </svg>
     )
   }
   if (kind === 'travertine' || kind === 'marble') {
     const g = nid('trv')
-    const base = kind === 'marble' ? ['#F2EEE6', '#DAD2C4'] : ['#ECE5D6', '#D6CBB5']
-    const vein = kind === 'marble' ? '#A9A091' : '#B6AB92'
+    const base = kind === 'marble' ? ['#C9D9CA', '#BECEBF'] : ['#C9D9CB', '#B0C8B2']
+    const vein = kind === 'marble' ? '#879A88' : '#8BA58E'
     return (
       <svg style={fill} viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <defs><linearGradient id={g} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor={base[0]} /><stop offset="1" stopColor={base[1]} /></linearGradient></defs>
@@ -54,12 +54,12 @@ export function Material({ kind }: { kind: MaterialKind }) {
     return (
       <svg style={fill} viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <defs>
-          <linearGradient id={g} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#DCB876" /><stop offset="0.5" stopColor="#B5904F" /><stop offset="1" stopColor="#8E6E3C" /></linearGradient>
+          <linearGradient id={g} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#8CAF8F" /><stop offset="0.5" stopColor="#5F8962" /><stop offset="1" stopColor="#466548" /></linearGradient>
           <linearGradient id={s} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#fff" stopOpacity="0" /><stop offset="0.45" stopColor="#fff" stopOpacity="0.45" /><stop offset="0.6" stopColor="#fff" stopOpacity="0" /></linearGradient>
         </defs>
         <rect width="120" height="120" fill={`url(#${g})`} />
-        <g stroke="#6E531F" strokeWidth="0.5">{lines.map((x, i) => <line key={i} x1={x} y1="0" x2={x} y2="120" opacity={i % 2 ? 0.18 : 0.07} />)}</g>
-        <g stroke="#F4DDA8" strokeWidth="0.5" opacity="0.4">{lines.map((x, i) => <line key={i} x1={x + 1.4} y1="0" x2={x + 1.4} y2="120" />)}</g>
+        <g stroke="#303A31" strokeWidth="0.5">{lines.map((x, i) => <line key={i} x1={x} y1="0" x2={x} y2="120" opacity={i % 2 ? 0.18 : 0.07} />)}</g>
+        <g stroke="#BACFBD" strokeWidth="0.5" opacity="0.4">{lines.map((x, i) => <line key={i} x1={x + 1.4} y1="0" x2={x + 1.4} y2="120" />)}</g>
         <rect width="120" height="120" fill={`url(#${s})`} />
       </svg>
     )
@@ -69,13 +69,13 @@ export function Material({ kind }: { kind: MaterialKind }) {
   return (
     <svg style={fill} viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
-        <linearGradient id={g} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#D5CDBE" /><stop offset="1" stopColor="#B8AD98" /></linearGradient>
+        <linearGradient id={g} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#B7C9B9" /><stop offset="1" stopColor="#91A893" /></linearGradient>
         <pattern id={wv} width="8" height="8" patternUnits="userSpaceOnUse">
           <rect width="8" height="8" fill={`url(#${g})`} />
           <rect x="0" y="0" width="3.4" height="3.4" fill="#fff" opacity="0.14" />
           <rect x="4" y="4" width="3.4" height="3.4" fill="#fff" opacity="0.14" />
-          <rect x="4" y="0" width="3.4" height="3.4" fill="#6F6453" opacity="0.1" />
-          <rect x="0" y="4" width="3.4" height="3.4" fill="#6F6453" opacity="0.1" />
+          <rect x="4" y="0" width="3.4" height="3.4" fill="#49594A" opacity="0.1" />
+          <rect x="0" y="4" width="3.4" height="3.4" fill="#49594A" opacity="0.1" />
         </pattern>
       </defs>
       <rect width="120" height="120" fill={`url(#${wv})`} />
@@ -87,20 +87,20 @@ export type SceneKind = 'facade' | 'interior' | 'plan' | 'build' | 'house' | 'te
 
 export function Scene({ kind }: { kind: SceneKind }) {
   const sky = nid('sky')
-  const Frame = ({ children, from = '#DED4C1', to = '#C7B89C' }: { children: React.ReactNode; from?: string; to?: string }) => (
+  const Frame = ({ children, from = '#BCD1BE', to = '#97B69A' }: { children: React.ReactNode; from?: string; to?: string }) => (
     <svg style={fill} viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs><linearGradient id={sky} x1="0" y1="0" x2="0.6" y2="1"><stop offset="0" stopColor={from} /><stop offset="1" stopColor={to} /></linearGradient></defs>
       <rect width="120" height="120" fill={`url(#${sky})`} />
       {children}
     </svg>
   )
-  const ink = '#3B362C', soft = 'rgba(59,54,44,0.16)', clay = '#B17A57'
+  const ink = '#1E241F', soft = 'rgba(59,54,44,0.16)', clay = '#628C61'
 
   switch (kind) {
     case 'facade': {
       const cols = [0, 1, 2, 3], rows = [0, 1, 2, 3]
       return (
-        <Frame from="#E0D6C3" to="#C2B392">
+        <Frame from="#BFD2C1" to="#8EB092">
           <rect x="30" y="20" width="60" height="90" fill="rgba(59,54,44,0.10)" />
           {rows.map((r) => cols.map((c) => <rect key={`${r}-${c}`} x={36 + c * 13} y={28 + r * 18} width="9" height="12" fill={soft} />))}
           <rect x="30" y="20" width="60" height="90" fill="none" stroke={ink} strokeWidth="1" opacity="0.4" />
@@ -112,7 +112,7 @@ export function Scene({ kind }: { kind: SceneKind }) {
     case 'interior': {
       // an armchair + floor lamp on a rug — reads clearly as furniture / interiors
       return (
-        <Frame from="#E5DBC9" to="#CFC0A4">
+        <Frame from="#C6D7C7" to="#A1BDA3">
           <line x1="10" y1="94" x2="110" y2="94" stroke={ink} strokeWidth="1.1" opacity="0.4" />
           <ellipse cx="54" cy="95" rx="42" ry="4.5" fill="rgba(59,54,44,0.10)" />
           {/* armchair */}
@@ -132,7 +132,7 @@ export function Scene({ kind }: { kind: SceneKind }) {
     }
     case 'lighting': {
       return (
-        <Frame from="#E5DBC9" to="#CFC0A4">
+        <Frame from="#C6D7C7" to="#A1BDA3">
           <line x1="0" y1="84" x2="120" y2="84" stroke={ink} strokeWidth="1" opacity="0.35" />
           <rect x="14" y="26" width="34" height="40" fill="none" stroke={ink} strokeWidth="1.1" opacity="0.4" />
           <line x1="31" y1="26" x2="31" y2="66" stroke={ink} strokeWidth="0.8" opacity="0.3" />
@@ -146,7 +146,7 @@ export function Scene({ kind }: { kind: SceneKind }) {
     case 'plan':
     case 'schedule': {
       return (
-        <Frame from="#E8E0D0" to="#D6CBB4">
+        <Frame from="#C9D9CA" to="#AFC8B2">
           <rect x="16" y="16" width="88" height="88" fill="none" stroke={ink} strokeWidth="1.2" opacity="0.45" />
           <line x1="58" y1="16" x2="58" y2="104" stroke={ink} strokeWidth="1" opacity="0.35" />
           <line x1="58" y1="58" x2="104" y2="58" stroke={ink} strokeWidth="1" opacity="0.35" />
@@ -159,7 +159,7 @@ export function Scene({ kind }: { kind: SceneKind }) {
     case 'build': {
       // a tower crane lifting a load over a building under construction
       return (
-        <Frame from="#DCD2BF" to="#C3B496">
+        <Frame from="#BACFBC" to="#91B195">
           <line x1="10" y1="96" x2="110" y2="96" stroke={ink} strokeWidth="1.2" opacity="0.42" />
           {/* built lower floors */}
           <rect x="22" y="56" width="40" height="40" fill="rgba(59,54,44,0.10)" />
@@ -188,7 +188,7 @@ export function Scene({ kind }: { kind: SceneKind }) {
     }
     case 'house': {
       return (
-        <Frame from="#E2D8C6" to="#C9BA9D">
+        <Frame from="#C2D5C3" to="#99B89C">
           <path d="M30 60 L60 36 L90 60 Z" fill="rgba(59,54,44,0.16)" stroke={ink} strokeWidth="1" opacity="0.5" />
           <rect x="38" y="60" width="44" height="44" fill="rgba(59,54,44,0.10)" stroke={ink} strokeWidth="1" opacity="0.45" />
           <rect x="54" y="80" width="12" height="24" fill={clay} opacity="0.5" />
@@ -199,7 +199,7 @@ export function Scene({ kind }: { kind: SceneKind }) {
     }
     case 'kitchen': {
       return (
-        <Frame from="#E5DBC9" to="#CFC0A4">
+        <Frame from="#C6D7C7" to="#A1BDA3">
           <rect x="16" y="64" width="88" height="40" fill="rgba(59,54,44,0.10)" stroke={ink} strokeWidth="1" opacity="0.4" />
           {[0, 1, 2, 3].map((i) => <line key={i} x1={16 + (i + 1) * 22} y1="64" x2={16 + (i + 1) * 22} y2="104" stroke={ink} strokeWidth="0.8" opacity="0.3" />)}
           <rect x="16" y="58" width="88" height="6" fill="rgba(59,54,44,0.2)" />
@@ -210,10 +210,10 @@ export function Scene({ kind }: { kind: SceneKind }) {
     }
     // team
     default: {
-      const av = ['#C7A574', '#9CA382', '#B0A18C', '#8B8275']
+      const av = ['#7EA57F', '#799287', '#859F85', '#6A7A6B']
       return (
-        <Frame from="#E2D8C6" to="#CABB9E">
-          {av.map((c, i) => <circle key={i} cx={36 + i * 16} cy="54" r="13" fill={c} stroke="#F3EEE4" strokeWidth="2" />)}
+        <Frame from="#C2D5C3" to="#9AB99D">
+          {av.map((c, i) => <circle key={i} cx={36 + i * 16} cy="54" r="13" fill={c} stroke="#C9D9CA" strokeWidth="2" />)}
           {av.map((_, i) => <rect key={i} x={26 + i * 16} y="72" width="20" height="22" rx="6" fill="rgba(59,54,44,0.12)" />)}
         </Frame>
       )

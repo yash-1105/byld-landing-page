@@ -14,7 +14,7 @@ export function roleKeyFor(label: string): RoleKey {
   return 'architect'
 }
 
-export function RoleIcon({ role, size = 20, color = '#FBF8F2' }: { role: RoleKey; size?: number; color?: string }) {
+export function RoleIcon({ role, size = 20, color = '#F5F8F6' }: { role: RoleKey; size?: number; color?: string }) {
   const c = { fill: 'none', stroke: color, strokeWidth: 1.7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const }
 
   let body: ReactElement

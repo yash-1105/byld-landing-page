@@ -2,8 +2,8 @@
 
 export type FileKind = 'plan' | 'sheet' | 'contract'
 
-const INK = '#7A6A4C'   // warm motif color, reads on the beige thumbnails
-const CLAY = '#B17A57'  // accent, used for the signature
+const INK = '#3D4C42'   // warm motif color, reads on the beige thumbnails
+const CLAY = '#4E5E54'  // accent, used for the signature
 
 function Glyph({ kind }: { kind: FileKind }) {
   if (kind === 'plan') {

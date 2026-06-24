@@ -36,25 +36,25 @@ export default function Nav() {
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
       backdropFilter: t > 0.02 ? 'saturate(140%) blur(14px)' : 'none',
       WebkitBackdropFilter: t > 0.02 ? 'saturate(140%) blur(14px)' : 'none',
-      background: `rgba(246,244,239,${(0.72 * t).toFixed(3)})`,
-      borderBottom: `1px solid rgba(228,222,210,${(0.7 * t).toFixed(3)})`,
+      background: `rgba(241,244,241,${(0.72 * t).toFixed(3)})`,
+      borderBottom: `1px solid rgba(214,224,216,${(0.7 * t).toFixed(3)})`,
       transition: 'background .25s ease, border-color .25s ease',
     }}>
       <nav style={{ width: '100%', padding: '18px clamp(20px,4vw,56px)', display: 'flex', alignItems: 'center', gap: 32 }}>
         <a href="#top" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', textDecoration: 'none', marginRight: 'auto' }}>
-          {/* dark wordmark (visible once the bar turns to paper) */}
-          <img src="/assets/byld-logo.png" alt="BYLD Space" style={{ height: 24, display: 'block' }} />
-          {/* white wordmark, fades out as the bar becomes opaque, keeps the logo legible over the dark hero */}
+          {/* full BYLD / SPACE lockup (visible once the bar turns to paper) */}
+          <img src="/assets/byld-lockup.png" alt="BYLD Space" style={{ height: 46, display: 'block' }} />
+          {/* white lockup, fades out as the bar becomes opaque, keeps the logo legible over the dark hero */}
           <img
-            src="/assets/byld-logo.png" alt="" aria-hidden="true"
+            src="/assets/byld-lockup.png" alt="" aria-hidden="true"
             style={{
-              position: 'absolute', left: 0, top: 0, height: 24, display: 'block', pointerEvents: 'none',
+              position: 'absolute', left: 0, top: 0, height: 46, display: 'block', pointerEvents: 'none',
               filter: 'brightness(0) invert(1)', opacity: 1 - t, transition: 'opacity .25s ease',
             }}
           />
         </a>
         <a href="#access" data-mag="0.4" className="btn-dark nav-pill" style={{
-          textDecoration: 'none', background: '#29261F', color: '#F6F4EF', fontSize: 14, fontWeight: 500,
+          textDecoration: 'none', background: '#29261F', color: '#F1F4F1', fontSize: 14, fontWeight: 500,
           letterSpacing: '-0.01em', padding: '11px 20px', borderRadius: 999,
           transition: 'transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s, background .35s',
           whiteSpace: 'nowrap', boxShadow: '0 10px 22px -14px rgba(41,38,31,.6)',

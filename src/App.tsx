@@ -40,9 +40,9 @@ export default function App() {
   return (
     <div id="byld-root" style={{ position: 'relative' }}>
       {!booted && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 200, background: '#F6F4EF', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', opacity: fade ? 0 : 1, transition: 'opacity .45s ease', pointerEvents: 'none' }}>
-          <img src="/assets/byld-logo.png" alt="BYLD Space" style={{ height: 30, display: 'block', marginBottom: 26 }} />
-          <div style={{ width: 30, height: 30, borderRadius: '50%', border: '2px solid #E4DCCB', borderTopColor: '#29261F', animation: 'spinSlow .8s linear infinite' }} />
+        <div style={{ position: 'fixed', inset: 0, zIndex: 200, background: '#F1F4F1', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', opacity: fade ? 0 : 1, transition: 'opacity .45s ease', pointerEvents: 'none' }}>
+          <img src="/assets/byld-lockup.png" alt="BYLD Space" style={{ height: 64, display: 'block', marginBottom: 30 }} />
+          <div style={{ width: 30, height: 30, borderRadius: '50%', border: '2px solid #D0DFD3', borderTopColor: '#29261F', animation: 'spinSlow .8s linear infinite' }} />
         </div>
       )}
 

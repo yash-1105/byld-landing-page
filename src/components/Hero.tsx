@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { ACCENT } from '../data'
 import { prefersReducedMotion } from '../hooks/useInteractions'
 
 const mono = "'JetBrains Mono',monospace"
@@ -170,30 +169,30 @@ export default function Hero() {
   const copy = (
     <div style={{ maxWidth: 760 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 30, flexWrap: 'wrap' }}>
-        <span style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: 'rgba(246,244,239,.62)' }}>BYLD Space</span>
+        <span style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: 'rgba(241,244,241,.62)' }}>BYLD Space</span>
         <span style={{
-          display: 'inline-flex', alignItems: 'center', gap: 7, border: '1px solid rgba(246,244,239,.28)', borderRadius: 999,
+          display: 'inline-flex', alignItems: 'center', gap: 7, border: '1px solid rgba(241,244,241,.28)', borderRadius: 999,
           padding: '5px 11px 5px 9px', fontFamily: mono, fontSize: 10.5, letterSpacing: '.16em',
-          textTransform: 'uppercase', color: 'rgba(246,244,239,.78)', background: 'rgba(246,244,239,.06)', whiteSpace: 'nowrap',
+          textTransform: 'uppercase', color: 'rgba(241,244,241,.78)', background: 'rgba(241,244,241,.06)', whiteSpace: 'nowrap',
         }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: ACCENT, animation: 'pulse 2.6s ease-in-out infinite' }} />Coming Soon
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#A9C3AE', animation: 'pulse 2.6s ease-in-out infinite' }} />Coming Soon
         </span>
       </div>
 
-      <h1 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(30px,4.1vw,56px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#F6F4EF', overflowWrap: 'break-word' }}>
-        The workspace built for <span style={{ color: '#E4B488' }}>modern architecture</span> and interior firms.
+      <h1 style={{ fontFamily: serif, fontWeight: 600, fontSize: 'clamp(30px,4.1vw,56px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#F1F4F1', overflowWrap: 'break-word' }}>
+        The workspace built for <span style={{ color: '#A9C3AE' }}>modern architecture</span> and interior firms.
       </h1>
 
-      <p style={{ margin: '30px 0 0', maxWidth: 500, fontSize: 'clamp(16px,1.5vw,19px)', lineHeight: 1.62, color: 'rgba(246,244,239,.82)' }}>
+      <p style={{ margin: '30px 0 0', maxWidth: 500, fontSize: 'clamp(16px,1.5vw,19px)', lineHeight: 1.62, color: 'rgba(241,244,241,.82)' }}>
         Manage projects, collaborate with clients, organize documents, and keep teams aligned, all from one place.
       </p>
-      <p style={{ margin: '18px 0 0', fontSize: 15, lineHeight: 1.6, color: 'rgba(246,244,239,.56)' }}>
+      <p style={{ margin: '18px 0 0', fontSize: 15, lineHeight: 1.6, color: 'rgba(241,244,241,.56)' }}>
         Built for architects, interior designers, and design-build teams.
       </p>
 
       <div style={{ marginTop: 38, display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
         <a href="#access" data-mag="0.45" className="hero-cta" style={{
-          display: 'inline-flex', alignItems: 'center', gap: 10, textDecoration: 'none', background: '#F6F4EF',
+          display: 'inline-flex', alignItems: 'center', gap: 10, textDecoration: 'none', background: '#F1F4F1',
           color: '#29261F', fontSize: 15.5, fontWeight: 600, letterSpacing: '-0.01em', padding: '16px 28px',
           borderRadius: 999, boxShadow: '0 18px 40px -16px rgba(20,15,9,.5)',
           transition: 'transform .4s cubic-bezier(.2,.7,.3,1), box-shadow .4s, background .4s',
@@ -201,7 +200,7 @@ export default function Hero() {
           Join Early Access
           <span style={{ fontFamily: mono, fontSize: 14 }}>→</span>
         </a>
-        <span style={{ fontSize: 14, color: 'rgba(246,244,239,.6)' }}>Be first when we launch.</span>
+        <span style={{ fontSize: 14, color: 'rgba(241,244,241,.6)' }}>Be first when we launch.</span>
       </div>
     </div>
   )
@@ -259,14 +258,14 @@ export default function Hero() {
             display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 9,
             opacity: hintOpacity, transition: 'opacity .25s linear', pointerEvents: 'none', zIndex: 2,
           }}>
-            <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: '.22em', textTransform: 'uppercase', color: 'rgba(246,244,239,.6)' }}>Scroll</span>
-            <span style={{ width: 1, height: 34, background: 'linear-gradient(rgba(246,244,239,.6), rgba(246,244,239,0))' }} />
+            <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: '.22em', textTransform: 'uppercase', color: 'rgba(241,244,241,.6)' }}>Scroll</span>
+            <span style={{ width: 1, height: 34, background: 'linear-gradient(rgba(241,244,241,.6), rgba(241,244,241,0))' }} />
           </div>
         )}
 
         {/* fade to paper as the pin releases, easing into the light sections below */}
         <div aria-hidden="true" style={{
-          position: 'absolute', inset: 0, background: '#F6F4EF', opacity: paperFade,
+          position: 'absolute', inset: 0, background: '#F1F4F1', opacity: paperFade,
           pointerEvents: 'none', zIndex: 3,
         }} />
       </div>

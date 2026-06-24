@@ -2,17 +2,17 @@
 html{ scroll-behavior:smooth; }
 body{
   margin:0;
-  background:#F6F4EF;
-  color:#5C564B;
+  background:#F1F4F1;
+  color:#54584F;
   font-family:'Inter',system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
   overflow-x:hidden;
 }
-::selection{ background:#E2DAC9; color:#29261F; }
+::selection{ background:#CEDDD1; color:#29261F; }
 ::-webkit-scrollbar{ width:11px; height:11px; }
-::-webkit-scrollbar-thumb{ background:#DAD2C4; border-radius:20px; border:3px solid #F6F4EF; }
-::-webkit-scrollbar-thumb:hover{ background:#C9BFAE; }
+::-webkit-scrollbar-thumb{ background:#C7D7CA; border-radius:20px; border:3px solid #F1F4F1; }
+::-webkit-scrollbar-thumb:hover{ background:#B2C5B6; }
 
 h1,h2,h3,p{ margin:0; }
 button{ font-family:inherit; }
@@ -34,7 +34,7 @@ button{ font-family:inherit; }
 
 /* ── feature cards: hover-expand + image zoom (parent-hover-child) ── */
 .fcard{ transition:transform .18s ease, box-shadow .45s cubic-bezier(.2,.7,.3,1), border-color .45s; }
-.fcard:hover{ box-shadow:0 38px 72px -34px rgba(41,38,31,.32); border-color:#E0D7C7; }
+.fcard:hover{ box-shadow:0 38px 72px -34px rgba(41,38,31,.32); border-color:#CCDBCF; }
 .fcard .fmore{ max-height:0; opacity:0; overflow:hidden; transition:max-height .5s cubic-bezier(.2,.7,.3,1), opacity .4s; }
 .fcard:hover .fmore{ max-height:64px; opacity:1; }
 .fcard .fimg{ transition:transform .65s cubic-bezier(.2,.7,.3,1); }
@@ -51,11 +51,11 @@ button{ font-family:inherit; }
 .talent .tdetail{ max-height:0; opacity:0; overflow:hidden; transition:max-height .55s cubic-bezier(.2,.7,.3,1), opacity .4s; }
 .talent:hover .tdetail{ max-height:140px; opacity:1; }
 .talent{ transition:transform .4s cubic-bezier(.2,.7,.3,1), box-shadow .4s, border-color .4s; }
-.talent:hover{ transform:translateY(-6px); box-shadow:0 34px 64px -34px rgba(41,38,31,.30); border-color:#E0D7C7; }
+.talent:hover{ transform:translateY(-6px); box-shadow:0 34px 64px -34px rgba(41,38,31,.30); border-color:#CCDBCF; }
 
 /* ── repeated hover behaviours from the reference (style-hover) ── */
 .btn-dark{ transition:transform .4s cubic-bezier(.2,.7,.3,1), box-shadow .4s, background .4s; }
-.btn-dark:hover{ background:#3A362E !important; }
+.btn-dark:hover{ background:#2D3B32 !important; }
 .nav-pill:hover{ box-shadow:0 16px 30px -12px rgba(41,38,31,.55); }
 .hero-cta:hover{ box-shadow:0 22px 44px -16px rgba(41,38,31,.55); }
 .cta-submit:hover{ box-shadow:0 20px 38px -14px rgba(41,38,31,.55); }
@@ -67,20 +67,20 @@ button{ font-family:inherit; }
 .stat-card:hover{ transform:translateY(-4px); box-shadow:0 20px 40px -24px rgba(41,38,31,.3); }
 
 .hover-row{ transition:background .25s; }
-.hover-row:hover{ background:#F4EFE6; }
+.hover-row:hover{ background:#EBEFEB; }
 
 .site-pill{ transition:transform .3s; }
 .site-pill:hover{ transform:scale(1.06); }
 
 .btn-reject{ transition:border-color .25s, color .25s; }
-.btn-reject:hover{ border-color:#A4593F; color:#A4593F; }
+.btn-reject:hover{ border-color:#4E6B57; color:#4E6B57; }
 .btn-approve{ transition:background .25s; }
-.btn-approve:hover{ background:#3A362E; }
+.btn-approve:hover{ background:#2D3B32; }
 .btn-history{ transition:color .25s; }
 .btn-history:hover{ color:#29261F; }
 
 .modal-close{ transition:background .25s, color .25s; }
-.modal-close:hover{ background:#29261F; color:#F6F4EF; }
+.modal-close:hover{ background:#29261F; color:#F1F4F1; }
 
 .social{ transition:border-color .3s, color .3s, transform .3s; }
 .social:hover{ border-color:#29261F; color:#29261F; transform:translateY(-2px); }

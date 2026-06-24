@@ -1,4 +1,4 @@
-export const ACCENT = '#B17A57'
+export const ACCENT = '#4E5E54'
 
 export type Vendor = { n: string; price: number; lead: string; rating: string }
 export type ProcItem = { id: ProcId; name: string; sub: string; vendors: Vendor[] }
@@ -50,11 +50,11 @@ export const FEATURES: Feature[] = [
 export type Talent = { role: string; skills: string; avail: string; tone: string; dot: string; works: string[] }
 
 export const TALENT: Talent[] = [
-  { role: 'Architect', skills: 'Concept · Permits · Detailing', avail: 'Available now', tone: '#C7A574,#A8854E', dot: '#7E866A', works: ['#D9C6A6,#BF9F6C', '#C9BFAE,#A89C86', '#B79766,#8E7044'] },
-  { role: 'Interior Designer', skills: 'FF&E · Styling · Sourcing', avail: 'Available now', tone: '#9CA382,#76805F', dot: '#7E866A', works: ['#CFC7BA,#A89C86', '#D9C6A6,#BF9F6C', '#9CA382,#76805F'] },
-  { role: 'Draftsman', skills: 'AutoCAD · Working drawings', avail: '2 wks', tone: '#B0A18C,#928572', dot: '#B17A57', works: ['#E7E0D2,#D3C9B6', '#C9BFAE,#A89C86', '#CFC4B0,#B3A998'] },
-  { role: 'BIM Specialist', skills: 'Revit · Coordination · Clash', avail: 'Available now', tone: '#BFA980,#9A7C4E', dot: '#7E866A', works: ['#B79766,#8E7044', '#C7A574,#A8854E', '#D9C6A6,#BF9F6C'] },
-  { role: 'Project Manager', skills: 'Schedules · Procurement · Site', avail: '1 wk', tone: '#C9BFAE,#9C907B', dot: '#B17A57', works: ['#CFC7BA,#A89C86', '#9CA382,#76805F', '#C9BFAE,#A89C86'] },
+  { role: 'Architect', skills: 'Concept · Permits · Detailing', avail: 'Available now', tone: '#4E5E54,#3B4A41', dot: '#4E5E54', works: ['#A8C3AA,#749E76', '#A7BBA9,#7E9780', '#6B986D,#496A4B'] },
+  { role: 'Interior Designer', skills: 'FF&E · Styling · Sourcing', avail: 'Available now', tone: '#5E6E60,#46544A', dot: '#6E7C72', works: ['#B3C3B4,#7E9780', '#A8C3AA,#749E76', '#799287,#576A63'] },
+  { role: 'Draftsman', skills: 'AutoCAD · Working drawings', avail: '2 wks', tone: '#2F352F,#22271F', dot: '#8A9384', works: ['#C9D9CA,#B0C5B2', '#A7BBA9,#7E9780', '#AAC1AC,#8FA491'] },
+  { role: 'BIM Specialist', skills: 'Revit · Coordination · Clash', avail: 'Available now', tone: '#5A7560,#42594A', dot: '#4E5E54', works: ['#6B986D,#496A4B', '#7EA57F,#59805B', '#A8C3AA,#749E76'] },
+  { role: 'Project Manager', skills: 'Schedules · Procurement · Site', avail: '1 wk', tone: '#6B786A,#535E52', dot: '#8A9384', works: ['#B3C3B4,#7E9780', '#799287,#576A63', '#A7BBA9,#7E9780'] },
 ]
 
 export type EcoNode = { label: string; x: number; y: number; links: number[] }
@@ -73,10 +73,10 @@ export type ApprovalStatus = 'pending' | 'approved' | 'rejected'
 export type Approval = { id: number; title: string; meta: string; status: ApprovalStatus; tone: string; history: string[] }
 
 export const INITIAL_APPROVALS: Approval[] = [
-  { id: 1, title: 'Facade Design, v3', meta: 'Shared with client · 2 revisions', status: 'approved', tone: '#D9C6A6,#C0A06E', history: ['v1 submitted to client', 'v2, window proportions revised', 'v3, approved by client'] },
-  { id: 2, title: 'Lighting Plan, v2', meta: 'Awaiting client feedback', status: 'pending', tone: '#C9BFAE,#A89C86', history: ['v1 submitted', 'v2, added cove lighting'] },
-  { id: 3, title: 'Material Schedule, v1', meta: 'Pending internal review', status: 'pending', tone: '#B79766,#8E7044', history: ['v1 submitted for internal review'] },
-  { id: 4, title: 'Kitchen Layout, v4', meta: '3 revisions logged', status: 'pending', tone: '#9CA382,#76805F', history: ['v1 concept', 'v2, island added', 'v3, plumbing moved', 'v4, final layout'] },
+  { id: 1, title: 'Facade Design, v3', meta: 'Shared with client · 2 revisions', status: 'approved', tone: '#A8C3AA,#759F78', history: ['v1 submitted to client', 'v2, window proportions revised', 'v3, approved by client'] },
+  { id: 2, title: 'Lighting Plan, v2', meta: 'Awaiting client feedback', status: 'pending', tone: '#A7BBA9,#7E9780', history: ['v1 submitted', 'v2, added cove lighting'] },
+  { id: 3, title: 'Material Schedule, v1', meta: 'Pending internal review', status: 'pending', tone: '#6B986D,#496A4B', history: ['v1 submitted for internal review'] },
+  { id: 4, title: 'Kitchen Layout, v4', meta: '3 revisions logged', status: 'pending', tone: '#799287,#576A63', history: ['v1 concept', 'v2, island added', 'v3, plumbing moved', 'v4, final layout'] },
 ]
 
 export const MODULE_LABELS = ['Project Management', 'Procurement', 'Documents', 'Approvals', 'Site Coordination']
