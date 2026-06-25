@@ -28,6 +28,24 @@ export default function Hero() {
     return () => mq.removeEventListener('change', onChange)
   }, [])
 
+  // Mobile: download the whole clip up front as a blob, then scrub off the local
+  // copy. Streaming + seeking into not-yet-buffered byte ranges is exactly what
+  // makes the FIRST scrub janky until the file finishes loading (worst on iPhone
+  // 16 Safari, whose seek pipeline thrashes on a partially-buffered all-intra
+  // clip); a fully-local blob removes that variable so every seek is instant.
+  // The poster shows until the blob is ready, so there's no janky partial scrub.
+  const [mobileSrc, setMobileSrc] = useState<string | null>(null)
+  useEffect(() => {
+    if (reduce || !mobile) { setMobileSrc(null); return }
+    let cancelled = false
+    let objUrl: string | null = null
+    fetch(MOBILE_VIDEO)
+      .then((r) => r.blob())
+      .then((blob) => { if (!cancelled) { objUrl = URL.createObjectURL(blob); setMobileSrc(objUrl) } })
+      .catch(() => { if (!cancelled) setMobileSrc(MOBILE_VIDEO) }) // fall back to streaming
+    return () => { cancelled = true; if (objUrl) URL.revokeObjectURL(objUrl) }
+  }, [reduce, mobile])
+
   // Scrub video currentTime to scroll position while the hero is pinned.
   // Mobile: direct seek on scroll (no RAF loop) + prime only on first touch gesture.
   // Desktop: smooth lerp via RAF loop.
@@ -36,6 +54,7 @@ export default function Hero() {
     const section = sectionRef.current
     const video = videoRef.current
     if (!section || !video) return
+    if (mobile && !mobileSrc) return // wait for the blob; poster shows meanwhile
 
     let duration = video.duration || 0
     const onMeta = () => { duration = video.duration || 0 }
@@ -158,7 +177,7 @@ export default function Hero() {
       window.removeEventListener('resize', onScroll)
       video.removeEventListener('loadedmetadata', onMeta)
     }
-  }, [reduce, mobile])
+  }, [reduce, mobile, mobileSrc])
 
   // progress-driven overlay transitions
   const contentOpacity = reduce ? 1 : 1 - clamp((progress - 0.5) / 0.28, 0, 1)
@@ -222,7 +241,8 @@ export default function Hero() {
   }
 
   // ── pinned, scroll-scrubbed video (landscape on desktop, vertical 9:16 on mobile) ──
-  const src = mobile ? MOBILE_VIDEO : VIDEO
+  // mobile src is the blob (null until downloaded → poster shows); desktop streams directly
+  const src = mobile ? mobileSrc : VIDEO
   const poster = mobile ? MOBILE_POSTER : POSTER
   const scrim = mobile
     ? 'linear-gradient(180deg, rgba(18,16,12,.64) 0%, rgba(18,16,12,.30) 15%, rgba(18,16,12,.30) 40%, rgba(18,16,12,.44) 66%, rgba(18,16,12,.74) 100%)'
@@ -233,7 +253,7 @@ export default function Hero() {
     <section id="top" ref={sectionRef} style={{ position: 'relative', height: '320vh', background: '#14120E' }}>
       <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
         <video
-          key={src} ref={videoRef} src={src} poster={poster}
+          key={src ?? 'pending'} ref={videoRef} src={src ?? undefined} poster={poster}
           muted playsInline preload="auto"
           style={cover}
         />
