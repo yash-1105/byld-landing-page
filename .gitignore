@@ -13,3 +13,6 @@ dist-ssr
 # misc
 .DS_Store
 *.log
+
+# local scratch
+scratchpad

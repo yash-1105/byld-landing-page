@@ -4,10 +4,10 @@ import { prefersReducedMotion } from '../hooks/useInteractions'
 const mono = "'JetBrains Mono',monospace"
 const serif = "'Inter',system-ui,sans-serif"
 
-const VIDEO = '/assets/hero-villa-2.mp4'                  // desktop: landscape, all-intra
-const POSTER = '/assets/hero-villa-poster.jpg'
-const MOBILE_VIDEO = '/assets/hero-villa-mobile-v3.mp4'  // mobile: vertical 9:16, 720×1280 all-intra (downscaled from 1080p for cheap per-seek decode)
-const MOBILE_POSTER = '/assets/hero-villa-mobile-poster.jpg'
+const VIDEO = '/assets/hero-landing-desktop.mp4'           // desktop: 16:9, native 1920×1080 all-intra
+const POSTER = '/assets/hero-landing-desktop-poster.jpg'
+const MOBILE_VIDEO = '/assets/hero-landing-phone.mp4'      // mobile: vertical 9:16, native 1080×1920 all-intra
+const MOBILE_POSTER = '/assets/hero-landing-phone-poster.jpg'
 
 const clamp = (n: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, n))
 const matchMobile = () => typeof window !== 'undefined' && window.matchMedia('(max-width: 820px)').matches

@@ -1,6 +1,18 @@
 import { useEffect, useState } from 'react'
 
+const matchMobile = () => typeof window !== 'undefined' && window.matchMedia('(max-width: 820px)').matches
+
 export default function Nav() {
+  // shrink the logo + CTA on phones (they read oversized on a narrow screen)
+  const [mobile, setMobile] = useState(matchMobile)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 820px)')
+    const onChange = () => setMobile(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+  const logoH = mobile ? 34 : 46
+
   // 0 = transparent over the hero video, 1 = opaque paper bar.
   // Tied to the hero's scroll progress so the bar fades in exactly as the hero
   // dissolves to paper (same curve as Hero's paperFade), staying clear for the
@@ -43,19 +55,19 @@ export default function Nav() {
       <nav style={{ width: '100%', padding: '18px clamp(20px,4vw,56px)', display: 'flex', alignItems: 'center', gap: 32 }}>
         <a href="#top" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', textDecoration: 'none', marginRight: 'auto' }}>
           {/* full BYLD / SPACE lockup (visible once the bar turns to paper) */}
-          <img src="/assets/byld-lockup.png" alt="BYLD Space" style={{ height: 46, display: 'block' }} />
+          <img src="/assets/byld-lockup.png" alt="BYLD Space" style={{ height: logoH, display: 'block' }} />
           {/* white lockup, fades out as the bar becomes opaque, keeps the logo legible over the dark hero */}
           <img
             src="/assets/byld-lockup.png" alt="" aria-hidden="true"
             style={{
-              position: 'absolute', left: 0, top: 0, height: 46, display: 'block', pointerEvents: 'none',
+              position: 'absolute', left: 0, top: 0, height: logoH, display: 'block', pointerEvents: 'none',
               filter: 'brightness(0) invert(1)', opacity: 1 - t, transition: 'opacity .25s ease',
             }}
           />
         </a>
         <a href="#access" data-mag="0.4" className="btn-dark nav-pill" style={{
-          textDecoration: 'none', background: '#29261F', color: '#F1F4F1', fontSize: 14, fontWeight: 500,
-          letterSpacing: '-0.01em', padding: '11px 20px', borderRadius: 999,
+          textDecoration: 'none', background: '#29261F', color: '#F1F4F1', fontSize: mobile ? 12.5 : 14, fontWeight: 500,
+          letterSpacing: '-0.01em', padding: mobile ? '8px 14px' : '11px 20px', borderRadius: 999,
           transition: 'transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s, background .35s',
           whiteSpace: 'nowrap', boxShadow: '0 10px 22px -14px rgba(41,38,31,.6)',
         }}>Join Early Access</a>
