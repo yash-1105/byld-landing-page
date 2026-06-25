@@ -63,9 +63,12 @@ export default function ProductShowcase() {
             </div>
             <div style={{ flex: 1, maxWidth: 460, margin: '0 auto', background: '#E7ECE8', border: '1px solid #D9E1DA', borderRadius: 8, padding: '6px 14px', fontFamily: mono, fontSize: 11, color: '#7C7F77', textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{viewTitle}</div>
             <div style={{ display: 'flex' }}>
-              <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#4E5E54', border: '2px solid #F4F7F5' }} />
-              <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#5E6E60', border: '2px solid #F4F7F5', marginLeft: -7 }} />
-              <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#647A68', border: '2px solid #F4F7F5', marginLeft: -7 }} />
+              {[{ bg: '#4E5E54', initials: 'AR' }, { bg: '#5E6E60', initials: 'MT' }, { bg: '#647A68', initials: 'KS' }].map((a, i) => (
+                <div key={a.initials} style={{
+                  width: 24, height: 24, borderRadius: '50%', background: a.bg, border: '2px solid #F4F7F5', marginLeft: i === 0 ? 0 : -7,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#F1F4F1', fontFamily: mono, fontSize: 8.5, fontWeight: 600, letterSpacing: '.02em',
+                }}>{a.initials}</div>
+              ))}
             </div>
           </div>
 
@@ -90,7 +93,7 @@ export default function ProductShowcase() {
               })}
               <div style={{ marginTop: 'auto', padding: '14px 11px 0', borderTop: '1px solid #E1E7E2' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
-                  <div style={{ width: 28, height: 28, borderRadius: 8, background: 'linear-gradient(135deg,#88B396,#6F9D7E)' }} />
+                  <div style={{ width: 28, height: 28, borderRadius: 8, background: 'linear-gradient(135deg,#88B396,#6F9D7E)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#F4F7F5', fontFamily: serif, fontSize: 12, fontWeight: 600, letterSpacing: '.01em' }}>SA</div>
                   <div><div style={{ fontSize: 12, fontWeight: 600, color: '#29261F' }}>Studio Atelier</div><div style={{ fontFamily: mono, fontSize: 9, color: '#9A9D96' }}>8 PROJECTS</div></div>
                 </div>
               </div>
@@ -214,9 +217,17 @@ function DocsPanel() {
   const scatter = (style: React.CSSProperties, name: string) => (
     <div style={{ position: 'absolute', background: '#F8FAF8', border: '1px solid #E1E7E2', borderRadius: 8, padding: '8px 11px', fontSize: 10.5, color: '#7C7F77', boxShadow: '0 8px 18px -10px rgba(41,38,31,.25)', ...style }}>{name}</div>
   )
-  const settle = (from: string, delay: string, tone: string, name: string, tag: string, tagColor: string) => (
+  // small file-type symbol drawn inside each document chip
+  const fileGlyph = (kind: 'plan' | 'sheet' | 'doc' | 'image') => {
+    const s = { width: 13, height: 13, viewBox: '0 0 24 24', fill: 'none', stroke: '#46584C', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' } as React.SVGProps<SVGSVGElement>
+    if (kind === 'plan') return <svg {...s}><rect x="3" y="3" width="18" height="18" rx="1.5" /><path d="M3 10h11M14 3v11M14 14h7" /></svg>
+    if (kind === 'sheet') return <svg {...s}><rect x="3" y="3" width="18" height="18" rx="1.5" /><path d="M3 10h18M10 3v18" /></svg>
+    if (kind === 'image') return <svg {...s}><rect x="3" y="4" width="18" height="16" rx="1.5" /><circle cx="9" cy="9.5" r="1.5" /><path d="M4 18l5-5 4 4 3.5-3.5L21 17" /></svg>
+    return <svg {...s}><path d="M7 3h7l4 4v14H7z" /><path d="M14 3v4h4M10 13h5M10 16.5h5" /></svg> // doc
+  }
+  const settle = (from: string, delay: string, tone: string, name: string, tag: string, tagColor: string, kind: 'plan' | 'sheet' | 'doc' | 'image') => (
     <div style={{ '--from': from, animation: `settle .8s cubic-bezier(.2,.7,.3,1) both`, animationDelay: delay, display: 'flex', alignItems: 'center', gap: 11, background: '#EBEFEB', borderRadius: 9, padding: '9px 11px' } as React.CSSProperties}>
-      <div style={{ width: 22, height: 28, borderRadius: 3, background: tone }} />
+      <div style={{ width: 24, height: 28, borderRadius: 4, background: tone, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{fileGlyph(kind)}</div>
       <div style={{ flex: 1 }}><div style={{ fontSize: 11.5, color: '#29261F', fontWeight: 500 }}>{name}</div></div>
       <span style={{ fontSize: 9.5, color: tagColor, fontFamily: mono }}>{tag}</span>
     </div>
@@ -236,10 +247,10 @@ function DocsPanel() {
         <div style={{ flex: 1, minWidth: 220, background: '#F8FAF8', border: '1px solid #E1E7E2', borderRadius: 14, padding: 14, height: 232 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}><span style={{ fontFamily: mono, fontSize: 9, letterSpacing: '.1em', color: '#5E6E62' }}>ORGANIZED · RIVERSIDE</span></div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {settle('translate(-90px,-40px) rotate(-12deg)', '.05s', '#CCDBCF', 'Floor Plans, Rev C.pdf', 'DRAWINGS', '#5E6E62')}
-            {settle('translate(110px,-20px) rotate(10deg)', '.16s', '#B9CFBE', 'Quotation_Marble.xlsx', 'QUOTES', '#7C7F77')}
-            {settle('translate(-70px,40px) rotate(8deg)', '.27s', '#B2C5B6', 'Contract_Signed.pdf', 'LEGAL', '#7C7F77')}
-            {settle('translate(90px,40px) rotate(-9deg)', '.38s', '#B4CBB9', 'Render_Living_v3.jpg', 'RENDERS', '#7C7F77')}
+            {settle('translate(-90px,-40px) rotate(-12deg)', '.05s', '#CCDBCF', 'Floor Plans, Rev C.pdf', 'DRAWINGS', '#5E6E62', 'plan')}
+            {settle('translate(110px,-20px) rotate(10deg)', '.16s', '#B9CFBE', 'Quotation_Marble.xlsx', 'QUOTES', '#7C7F77', 'sheet')}
+            {settle('translate(-70px,40px) rotate(8deg)', '.27s', '#B2C5B6', 'Contract_Signed.pdf', 'LEGAL', '#7C7F77', 'doc')}
+            {settle('translate(90px,40px) rotate(-9deg)', '.38s', '#B4CBB9', 'Render_Living_v3.jpg', 'RENDERS', '#7C7F77', 'image')}
           </div>
         </div>
       </div>
